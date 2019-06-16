@@ -1,0 +1,31 @@
+@baseWidth: 400px;
+
+@keyframes run {
+  from {
+    width: @baseWidth;
+  }
+  to {
+    width: 100px;
+  }
+}
+
+.img {
+  background-image: url(../assets/right.png);
+  background-repeat: no-repeat;
+  width: @baseWidth;
+  height: @baseWidth;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  animation: run 1s;
+}
+
+#root {
+  width: 100px;
+  height: 120px;
+  background: red;
+}
+
+

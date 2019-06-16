@@ -1,0 +1,19 @@
+{
+  "extends": "eslint:recommended",
+  "parser": "babel-eslint",
+  "plugins": [
+    "react"
+  ],
+  "env": {
+    "browser": true,
+    "node": true,
+    "commonjs": true,
+    "es6": true
+  },
+  "rules": {
+    "no-undef": 2,
+    "quotes": [1, "single"],
+    "no-unused-vars": 1,
+    "no-console": 0
+  }
+}
