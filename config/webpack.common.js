@@ -1,85 +1,60 @@
-const webpack = require('webpack')
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const glob = require('glob')
-const PurgecssWebpackPlugin = require('purgecss-webpack-plugin') // 去除未使用的css
 
-module.exports = function (env) {
-  const cwd = process.cwd();
-  const PATHS = {
-    src: path.join(cwd, 'src'),
-    dist: path.join(cwd, 'dist'),
-    dll: path.join(cwd, 'dll'),
-  }
+const cwd = process.cwd();
+const PATHS = {
+  cwd,
+  src: path.join(cwd, 'src'),
+  dist: path.join(cwd, 'dist'),
+  dll: path.join(cwd, 'dll'),
+}
+module.exports.PATHS = PATHS;
 
-  const isProduction = env.production;
-  const publicPath = 'http://www.baidu.com';
-
-  const rules = [
-    {
-      test: /\.(le|c)ss$/,
-      use: [
-        {
-          loader: MiniCssExtractPlugin.loader,
-          options: {
-            publicPath: `${cwd}`,
-            hmr: !isProduction
-          }
-        },
-        {
-          loader: 'css-loader'
-        },
-        {
-          loader: 'postcss-loader'
-        },
-        {
-          loader: 'less-loader'
-        }
-      ]
-    },
-    {
-      test: /\.(png|jpg|jpeg|gif)$/,
-      use: [
-        {
-          loader: 'file-loader',
-          options: {
-            name: '[path][name].[ext]'
-          }
-        },
-
-      ]
-    },
-    {
-      test: /\.js$/,
-      use: [
-        {
-          loader: 'babel-loader'
-        }
-      ],
-      exclude: /node_modules/,
-    },
-  ]
-
-  const plugins = [
-    new PurgecssWebpackPlugin({
-      paths: glob.sync(path.join(`${PATHS.src}/**/*`), { nodir: true })
-    }),
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css',
-    }),
-    new CopyWebpackPlugin([
+const rules = [
+  {
+    test: /\.(le|c)ss$/,
+    use: [
       {
-        from: path.resolve(cwd, './assets'),
-        to: 'assets'
+        loader: 'css-loader'
       },
       {
-        from: path.resolve(cwd, 'dll'),
-        to: 'dll'
+        loader: 'postcss-loader'
+      },
+      {
+        loader: 'less-loader'
       }
-    ]),
+    ]
+  },
+  {
+    test: /\.js$/,
+    use: [
+      {
+        loader: 'babel-loader',
+      }
+    ],
+    exclude: /node_modules/,
+  },
+  {
+    test: /\.(png|jpg|jpeg|gif)$/,
+    use: [
+      {
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+          outputPath: './image/'
+        }
+      },
+    ]
+  },
+]
+
+module.exports.rules = rules;
+
+module.exports.common = function (env) {
+  const isProduction = env.production;
+  const publicPath = env.publicPath;
+
+  const plugins = [
     new HtmlWebpackPlugin({
       hash: true,
       minify: true,
@@ -103,7 +78,7 @@ module.exports = function (env) {
       path: PATHS.dist,
       filename: '[name].[hash:8].js',
       chunkFilename: '[name].[contenthash:8].js',
-      publicPath: isProduction ? publicPath : ''
+      publicPath: isProduction ? publicPath : './'
     },
 
     optimization: {
@@ -120,19 +95,17 @@ module.exports = function (env) {
       runtimeChunk: 'single', // 将 runtime 代码拆分为一个单独的 chunk
     },
 
-    module: {
-      rules,
-    },
-
     plugins,
 
     externals: {
-      jquery: 'jQuery'
+      jquery: 'jQuery', // jquery 不会被打进包里，需要外部引入依赖，如通过 script 标签引入 jQuery 库
     },
 
     watchOptions: {
       ignored: /node_modules/
     },
+
+    stats: 'errors-only', // 只在发生错误时输出信息
 
     resolve: {
       modules: [

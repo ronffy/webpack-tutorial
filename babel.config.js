@@ -46,7 +46,7 @@ module.exports = function (api) {
       }
     ],
     [
-      './myPlugin',
+      './my-babel-plugin',
       {
         ronffy: true
       }

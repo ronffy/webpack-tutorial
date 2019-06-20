@@ -21,14 +21,6 @@ document.getElementById('root').onclick = function () {
 }
 
 
-
-let b = React.createElement(
-  <div className="img" id="root">
-    <image src="../assets/right.png" />
-  </div>
-)
-
-
 async function getData() {
   let result = await fetch(apis.api1);
   result = await result.json();

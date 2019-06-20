@@ -1,35 +1,28 @@
 const webpack = require('webpack')
-const path = require('path');
 const merge = require('webpack-merge');
-const webpackCommon = require('./webpack.common');
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { common: webpackCommon, PATHS, rules } = require('./webpack.common');
+const MyWebpackPlugin = require('../my-webpack-plugin');
 
 module.exports = function (env, ...args) {
   const mode = env.production ? 'production' : 'development';
-  const cwd = process.cwd();
-  const PATHS = {
-    src: path.join(cwd, 'src'),
-    dist: path.join(cwd, 'dist'),
-    dll: path.join(cwd, 'dll'),
-  }
 
   let plugins = [
-    new HtmlWebpackPlugin({
-      hash: true,
-      minify: true,
-      title: 'mywebpack',
-      dllSrc: `${'./dll'}/vendor_dll.js`,
-      template: path.resolve(cwd, './public/index.html')
-    }),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new MyWebpackPlugin({
+      ronffy: true
+    })
   ];
 
   return merge(webpackCommon(env, ...args), {
     mode,
-    context: cwd,
+    context: PATHS.cwd,
     devtool: 'cheap-module-eval-source-map',
 
     plugins,
+
+    module: {
+      rules,
+    },
 
     devServer: {
       contentBase: PATHS.dist,

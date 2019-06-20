@@ -1,25 +1,71 @@
-const CleanWebpackPlugin = require('clean-webpack-plugin')
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer') // 分析打包文件的工具
+
+const path = require('path');
+const webpack = require('webpack');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const merge = require('webpack-merge');
-const webpackCommon = require('./webpack.common');
+const { common: webpackCommon, PATHS, rules } = require('./webpack.common');
+const glob = require('glob');
+const PurgecssWebpackPlugin = require('purgecss-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = function (env, ...args) {
   const mode = env.production ? 'production' : 'development';
-  const cwd = process.cwd();
+  const publicPath = env.publicPath;
+  const analyzer = env.analyzer;
 
   let plugins = [
     new CleanWebpackPlugin(),
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'static'
+    // 去除未使用的css
+    new PurgecssWebpackPlugin({
+      paths: glob.sync(path.join(`${PATHS.src}/**/*`), { nodir: true })
     }),
-    new webpackCommon.HashedModuleIdsPlugin(), // 解决 不论是否添加任何新的本地依赖，对于前后两次构建，vendor hash 都应该保持一致
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
+    new webpack.HashedModuleIdsPlugin(), // 解决 不论是否添加任何新的本地依赖，对于前后两次构建，vendor hash 都应该保持一致
   ];
+
+  if (analyzer) {
+    plugins.push(
+      // 分析打包文件的工具
+      new BundleAnalyzerPlugin({
+        analyzerMode: 'static'
+      })
+    )
+  }
+
+  const mergeRules = merge.smart(
+    {
+      loaders: [
+        {
+          test: /\.(le|c)ss$/,
+          use: [
+            {
+              loader: MiniCssExtractPlugin.loader,
+              options: {
+                publicPath: publicPath || `${PATHS.dist}`,
+                hmr: false,
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      loaders: rules
+    }).loaders;
 
   return merge(webpackCommon(env, ...args), {
     mode,
-    context: cwd,
+    context: PATHS.cwd,
 
-    devtool: 'hidden-source-map',
+    module: {
+      rules: mergeRules
+    },
+
+    devtool: 'none',
 
     plugins,
   })
