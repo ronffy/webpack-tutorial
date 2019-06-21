@@ -1,5 +1,4 @@
 const { defaultResult, Mock } = require('./_common')
-const { delay, getRandomTimeout } = require('./_utils')
 
 function getUsers(count = 10) {
   return Mock.mock({
@@ -18,30 +17,30 @@ function getUsers(count = 10) {
 }
 
 module.exports = {
-  ['get /web/users1']({ params }) {
+  ['get /web/users1'](req, res) {
+    const query = req.query;
     let count = 10; // 请求几条数据
-    if (params && params.count) {
-      count = params.count;
+    if (query && query.count) {
+      count = query.count;
     }
-    return getUsers(count);
+    res.json(getUsers(count));
   },
-  ['/app/users2']({ params }) {
+  ['/app/users2'](req, res) {
+    const query = req.query;
     let count = 10; // 请求几条数据
-    if (params && params.count) {
-      count = params.count;
+    if (query && query.count) {
+      count = query.count;
     }
-    return new Promise(res => {
-      setTimeout(() => {
-        res(getUsers(count))
-      }, getRandomTimeout());
-    })
+    setTimeout(() => {
+      res.json(getUsers(count));
+    }, 300);
   },
-  async ['post /app/users3']({ params }) {
-    await delay(getRandomTimeout());
+  ['post /app/users3'](req, res) {
+    const body = req.body;
     let count = 10; // 请求几条数据
-    if (params && params.count) {
-      count = params.count;
+    if (body && body.count) {
+      count = body.count;
     }
-    return getUsers(count);
+    return res.json(getUsers(count));
   },
 }

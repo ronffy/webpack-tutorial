@@ -78,7 +78,7 @@ module.exports.common = function (env) {
       path: PATHS.dist,
       filename: '[name].[hash:8].js',
       chunkFilename: '[name].[contenthash:8].js',
-      publicPath: isProduction ? publicPath : './'
+      publicPath: isProduction ? publicPath : '/'
     },
 
     optimization: {

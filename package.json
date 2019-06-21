@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --env.development --config=config/webpack.dev.js",
     "build": "webpack --env.production --env.publicPath=http://www.ronffy.com --config=config/webpack.prod.js",
-    "mock": "mockjs-server --port=9000",
+    "mock": "mockjs-server --port=9000 --delay=100-1000",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -48,9 +48,11 @@
     "less-loader": "^5.0.0",
     "mini-css-extract-plugin": "^0.7.0",
     "mockjs": "^1.0.1-beta3",
+    "mockjs-server-cli": "^1.2.0",
     "postcss-loader": "^3.0.0",
     "purgecss-webpack-plugin": "^1.5.0",
     "react-dev-utils": "^9.0.1",
+    "roadhog-api-doc": "^1.1.2",
     "style-loader": "^0.23.1",
     "url-loader": "^1.1.2",
     "webpack": "^4.32.2",
