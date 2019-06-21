@@ -1,7 +1,9 @@
-const Mock = require('mockjs');
+const { defaultResult, Mock } = require('./_common')
+const { delay, getRandomTimeout } = require('./_utils')
 
 function getUsers(count = 10) {
   return Mock.mock({
+    ...defaultResult,
     [`data|${count}`]: [
       {
         'id|+1': 1,
@@ -9,24 +11,24 @@ function getUsers(count = 10) {
         'email': '@email',
         'phone': /^1[34578]\d{9}$/,
         'website': '@domain',
-        avatar: '@image("200x100", "@name")'
+        'avatar': '@image("200x100", "@name")'
       }
     ]
-  }).data;
+  });
 }
 
 module.exports = {
-  ['get /web/users1']({ query }) {
+  ['get /web/users1']({ params }) {
     let count = 10; // 请求几条数据
-    if (query && query.count) {
-      count = query.count;
+    if (params && params.count) {
+      count = params.count;
     }
     return getUsers(count);
   },
-  ['/app/users2']({ query }) {
+  ['/app/users2']({ params }) {
     let count = 10; // 请求几条数据
-    if (query && query.count) {
-      count = query.count;
+    if (params && params.count) {
+      count = params.count;
     }
     return new Promise(res => {
       setTimeout(() => {
@@ -34,25 +36,12 @@ module.exports = {
       }, getRandomTimeout());
     })
   },
-  async ['post /app/users3']({ body }) {
+  async ['post /app/users3']({ params }) {
     await delay(getRandomTimeout());
     let count = 10; // 请求几条数据
-    if (body && body.count) {
-      count = body.count;
+    if (params && params.count) {
+      count = params.count;
     }
     return getUsers(count);
   },
-}
-
-
-function getRandomTimeout(min = 100, max = 1000) {
-  return Math.ceil((Math.random() || 0.1) * (max / min)) * min;
-}
-
-function delay(timeout) {
-  return new Promise(res => {
-    setTimeout(() => {
-      res()
-    }, timeout);
-  })
 }
