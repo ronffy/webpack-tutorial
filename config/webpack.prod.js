@@ -65,8 +65,14 @@ module.exports = function (env, ...args) {
       rules: mergeRules
     },
 
-    devtool: 'none',
+    devtool: 'hidden-source-map',
 
     plugins,
+
+    performance: {
+      hints: 'warning',
+      maxAssetSize: 200000,
+      maxEntrypointSize: 400000
+    },
   })
 }

@@ -24,6 +24,10 @@ module.exports = function (env, ...args) {
       rules,
     },
 
+    watchOptions: {
+      ignored: /node_modules/
+    },
+
     devServer: {
       contentBase: PATHS.dist,
       host: '0.0.0.0',

@@ -1,18 +1,20 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const cwd = process.cwd();
 const PATHS = {
   cwd,
-  src: path.join(cwd, 'src'),
-  dist: path.join(cwd, 'dist'),
-  dll: path.join(cwd, 'dll'),
+  src: path.resolve(cwd, 'src'),
+  dist: path.resolve(cwd, 'dist'),
 }
 module.exports.PATHS = PATHS;
 
 const rules = [
   {
     test: /\.(le|c)ss$/,
+    include: [
+      PATHS.src
+    ],
     use: [
       {
         loader: 'css-loader'
@@ -27,6 +29,9 @@ const rules = [
   },
   {
     test: /\.js$/,
+    include: [
+      PATHS.src
+    ],
     use: [
       {
         loader: 'babel-loader',
@@ -70,15 +75,17 @@ module.exports.common = function (env) {
   ];
 
   return {
+    context: PATHS.src,
     entry: {
-      index: './src/index.js',
-      main: './src/main.js',
+      index: 'index.js',
+      main: 'main.js',
     },
     output: {
       path: PATHS.dist,
       filename: '[name].[hash:8].js',
       chunkFilename: '[name].[contenthash:8].js',
-      publicPath: isProduction ? publicPath : '/'
+      publicPath: isProduction ? publicPath : '/',
+      sourceMapFilename: 'souremaps/[file].map'
     },
 
     optimization: {
@@ -101,10 +108,6 @@ module.exports.common = function (env) {
       jquery: 'jQuery', // jquery 不会被打进包里，需要外部引入依赖，如通过 script 标签引入 jQuery 库
     },
 
-    watchOptions: {
-      ignored: /node_modules/
-    },
-
     stats: 'errors-only', // 只在发生错误时输出信息
 
     resolve: {
@@ -112,7 +115,7 @@ module.exports.common = function (env) {
         PATHS.src,
         'node_modules'
       ],
-      extensions: ['.json', '.js'],
+      extensions: ['.js'],
       alias: {
         utils: path.resolve(PATHS.src, './utils')
       }
