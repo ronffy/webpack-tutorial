@@ -35,6 +35,10 @@ module.exports = function (env, ...args) {
       hot: true,
       historyApiFallback: true,
       // open: true,
+      overlay: {
+        warnings: true,
+        errors: true
+      },
       stats: 'errors-only',
       proxy: {
         '/api': {

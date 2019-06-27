@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --env.development --config=config/webpack.dev.js",
-    "build": "webpack --env.production --env.publicPath=http://www.ronffy.com --config=config/webpack.prod.js",
+    "start": "webpack-dev-server --progress --env.development --config=config/webpack.dev.js",
+    "build": "webpack --progress --env.production --env.publicPath=http://www.ronffy.com --config=config/webpack.prod.js",
     "mock": "mockjs-server --port=9000 --delay=100-1000",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
