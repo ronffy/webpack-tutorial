@@ -2,6 +2,8 @@ const webpack = require('webpack')
 const merge = require('webpack-merge');
 const { common: webpackCommon, PATHS, rules } = require('./webpack.common');
 const MyWebpackPlugin = require('../my-webpack-plugin');
+const { mockApiToApp } = require('mockjs-server-cli');
+const mockData = require('../mock.config.js');
 
 module.exports = function (env, ...args) {
   const mode = env.production ? 'production' : 'development';
@@ -12,6 +14,8 @@ module.exports = function (env, ...args) {
       ronffy: true
     })
   ];
+  const host = '127.0.0.1';
+  const port = '8008';
 
   return merge(webpackCommon(env, ...args), {
     mode,
@@ -30,10 +34,10 @@ module.exports = function (env, ...args) {
 
     devServer: {
       contentBase: PATHS.dist,
-      host: '0.0.0.0',
-      port: 8000,
+      host,
+      port,
       hot: true,
-      historyApiFallback: true,
+      // historyApiFallback: true,
       // open: true,
       overlay: {
         warnings: true,
@@ -42,7 +46,7 @@ module.exports = function (env, ...args) {
       stats: 'errors-only',
       proxy: {
         '/api': {
-          target: 'http://0.0.0.0:9000',
+          target: `http://${host}:${port}`,
           changeOrigin: true,
           pathRewrite: {
             '^/api': ''
@@ -51,8 +55,13 @@ module.exports = function (env, ...args) {
             if (req.headers.accept.indexOf('html') !== -1) {
               return '/index.html'
             }
-          }
+          },
+          
         },
+      },
+
+      before(app, server) {
+        mockApiToApp(app, mockData)
       }
 
     }
