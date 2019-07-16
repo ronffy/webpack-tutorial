@@ -1,14 +1,15 @@
 
 const pluginName = 'MyWebpackPlugin';
 
-module.exports = class MyWebpackPlugin {
-  constructor(options) {
-    this.options = options;
-  }
-  apply(compiler) {
-    compiler.hooks.run.tap(pluginName, compilation => {
-      console.log('compilation \n', compilation);
-      
-    })
-  }
+function MyWebpackPlugin(options) {
+  this.options = options;
 }
+
+MyWebpackPlugin.prototype.apply = function (compiler) {
+  compiler.hooks.compilation.tap(pluginName, compilation => {
+    // console.log('compilation \n', compilation);
+
+  })
+}
+
+module.exports = MyWebpackPlugin

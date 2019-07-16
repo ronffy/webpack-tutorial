@@ -15,14 +15,14 @@ module.exports = function (env, ...args) {
   const analyzer = env.analyzer;
 
   let plugins = [
-    new CleanWebpackPlugin(),
+    // new CleanWebpackPlugin(),
     // 去除未使用的css
     new PurgecssWebpackPlugin({
       paths: glob.sync(path.join(`${PATHS.src}/**/*`), { nodir: true })
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css',
+      filename: 'css/[name].css',
+      chunkFilename: 'css/[id].css',
     }),
     new webpack.HashedModuleIdsPlugin(), // 解决 不论是否添加任何新的本地依赖，对于前后两次构建，vendor hash 都应该保持一致
   ];

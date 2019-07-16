@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { version } = require('./package.json');
 
 const cwd = process.cwd();
 const PATHS = {
@@ -81,9 +82,9 @@ module.exports.common = function (env) {
       main: 'main.js',
     },
     output: {
-      path: PATHS.dist,
-      filename: '[name].[hash:8].js',
-      chunkFilename: '[name].[contenthash:8].js',
+      path: path.join(PATHS.dist, version),
+      filename: 'js/[name].[hash:8].js',
+      chunkFilename: 'js/[name].[contenthash:8].js',
       publicPath: isProduction ? publicPath : '/',
       sourceMapFilename: 'souremaps/[file].map'
     },
