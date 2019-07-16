@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { version } = require('./package.json');
+const { version } = require('../package.json');
 
 const cwd = process.cwd();
 const PATHS = {
