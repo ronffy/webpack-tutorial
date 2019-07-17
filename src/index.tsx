@@ -13,9 +13,9 @@ if (module.hot) {
 
 
 document.getElementById('root').onclick = function () {
-  Promise.all([import('./a.js'), import('./b.js')]).then(([a, b]) => {
-    console.log('111', a.f1(4));
-    console.log('222', b.default(5));
+  Promise.all([import('./a.jsx'), import('./b.jsx')]).then(([a, b]) => {
+    console.log('111', a.f1('4'));
+    console.log('222', b.default('5'));
   })
 
 }

@@ -1,5 +1,5 @@
 
-export default function doIt(params) {
+export default function doIt(params: string) {
   return `doit-${params}`
 }
 

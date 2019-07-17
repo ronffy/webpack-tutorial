@@ -116,7 +116,7 @@ module.exports.common = function (env) {
         PATHS.src,
         'node_modules'
       ],
-      extensions: ['.js'],
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],
       alias: {
         utils: path.resolve(PATHS.src, './utils')
       }

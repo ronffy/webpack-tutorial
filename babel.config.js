@@ -27,7 +27,10 @@ module.exports = function (api) {
       }
     ],
     [
-      '@babel/preset-typescript'
+      '@babel/preset-typescript',
+      {
+        isTSX: true
+      }
     ],
 
   ];
