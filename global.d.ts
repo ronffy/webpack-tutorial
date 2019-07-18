@@ -1,6 +1,8 @@
 
 declare interface NodeModule {
-  hot: any;
+  hot: {
+    [P: string]: any;
+  }
 }
 
 declare module 'jquery'
