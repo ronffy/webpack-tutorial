@@ -5,19 +5,20 @@ import { apis } from './config';
 import './index.less';
 
 if (module.hot) {
-  module.hot.accept('./a.js', function () {
+  module.hot.accept('./a', function () {
     
   })
 }
 
-
+const Com = () => <div>text</div>;
+console.log('Com', Com);
 
 document.getElementById('root').onclick = function () {
-  Promise.all([import('./a.jsx'), import('./b.jsx')]).then(([a, b]) => {
+  Promise.all([import('./a'), import('./b')]).then(([a, b]) => {
     console.log('111', a.f1('4'));
     console.log('222', b.default('5'));
+    console.log('Com', Com);
   })
-
 }
 
 

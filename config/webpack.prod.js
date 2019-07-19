@@ -15,7 +15,7 @@ module.exports = function (env, ...args) {
   const analyzer = env.analyzer;
 
   let plugins = [
-    // new CleanWebpackPlugin(),
+    new CleanWebpackPlugin(),
     // 去除未使用的css
     new PurgecssWebpackPlugin({
       paths: glob.sync(path.join(`${PATHS.src}/**/*`), { nodir: true })

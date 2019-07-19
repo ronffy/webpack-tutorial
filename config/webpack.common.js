@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const PreEndWebpackPlugin = require('pre-end-webpack-plugin');
 const { version } = require('../package.json');
 
 const cwd = process.cwd();
@@ -29,14 +30,21 @@ const rules = [
     ]
   },
   {
-    test: /\.js$/,
+    test: /\.[jt]sx?$/,
     include: [
       PATHS.src
     ],
     use: [
       {
         loader: 'babel-loader',
-      }
+      },
+      // 未使用 ts-loader ,而是使用的 @babel/preset-typescript
+      // 1. ts-loader 比 @babel/preset-typescript 运行慢，
+      // 2. ts-loader 比 @babel/preset-typescript 打出来的包偏大
+      // 3. ts-loader 在处理 import() 异步加载语法时有问题
+      // {
+      //   loader: 'ts-loader',
+      // }
     ],
     exclude: /node_modules/,
   },
@@ -60,6 +68,7 @@ module.exports.common = function (env) {
   const isProduction = env.production;
   const publicPath = env.publicPath;
 
+  const startTime = +new Date();
   const plugins = [
     new HtmlWebpackPlugin({
       hash: true,
@@ -72,14 +81,17 @@ module.exports.common = function (env) {
     // new webpack.DllReferencePlugin({
     //   context: cwd,
     //   manifest: require(`${cwd}/dll/dll_manifest.json`)
-    // })
+    // }),
+    new PreEndWebpackPlugin(() => {
+      console.log('\nRunning time:', +new Date() - startTime, 'ms');
+    })
   ];
 
   return {
     context: PATHS.src,
     entry: {
-      index: 'index.js',
-      main: 'main.js',
+      index: 'index.tsx',
+      main: 'main.tsx',
     },
     output: {
       path: path.join(PATHS.dist, version),
