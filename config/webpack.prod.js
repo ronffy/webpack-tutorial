@@ -65,7 +65,7 @@ module.exports = function (env, ...args) {
       rules: mergeRules
     },
 
-    devtool: 'hidden-source-map',
+    devtool: 'source-map',
 
     plugins,
 
