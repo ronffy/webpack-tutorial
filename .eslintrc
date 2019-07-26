@@ -27,7 +27,7 @@
   "rules": {
     "no-undef": 1,
     "quotes": [1, "single"],
-    "no-unused-vars": 1,
+    "no-unused-vars": 0,
     "no-console": 0
   }
 }
