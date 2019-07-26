@@ -1,8 +1,21 @@
 {
-  "extends": "eslint:recommended",
   "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    },
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "useJSXTextNode": true,
+    "project": "./tsconfig.json",
+    "extraFileExtensions": [
+      ".ts",
+      ".tsx"
+    ]
+  },
   "plugins": [
-    "typescript",
+    "@typescript-eslint",
     "react"
   ],
   "env": {

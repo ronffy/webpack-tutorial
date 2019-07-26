@@ -19,7 +19,7 @@ console.log('cName:', Color[0]);
   // readonly
   let a: number[] = [1, 2];
   let b: ReadonlyArray<number> = a;
-  // b[1] = 3; // error 
+  b[1] = 3; // error 
 
   let c = b as number[]; // 可以用断言重写
   c[1] = 3;
@@ -81,7 +81,7 @@ console.log('cName:', Color[0]);
   // 重载
 
   const pokers = [
-    { color: 'red', tally: 1 }, 
+    { color: 'red', tally: 1 },
     { color: 'black', tally: 2 },
     { color: 'red', tally: 11 },
     { color: 'black', tally: 5 },
@@ -142,14 +142,14 @@ console.log('cName:', Color[0]);
   // 泛型类
   class G<T> {
     name: T;
-    getName(): T{
+    getName(): T {
       return this.name;
     }
   }
   let c = new G<string>();
   let name2 = c.getName();
   console.log(name2);
-  
+
 
 
   // 泛型约束
@@ -167,8 +167,166 @@ console.log('cName:', Color[0]);
   function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
     return obj[key];
   }
-  let v = getProperty({name: 'x', age: 12}, 'age');
+  let v = getProperty({ name: 'x', age: 12 }, 'age');
 
 
 
 }
+
+
+{
+  // 枚举
+  enum Color {
+    RED = 'RED',
+    GREEN = 'GREEN',
+  }
+  function getColor(c: Color, hi?: string) {
+    if (c !== Color.RED && c !== Color.GREEN) {
+      console.log('参数输入错误');
+      return;
+    }
+    // console.log(hi.length);
+    // console.log(hi!.length);
+
+    if (c === Color.RED) {
+      console.log('我是红色的');
+    } else if (c === Color.GREEN) {
+      console.log('我是绿色的');
+    }
+  }
+
+  console.log('Color.RED', Color.RED);
+  getColor(Color.RED)
+}
+
+
+{
+  // 交叉类型
+  function extend<T extends object, U extends object>(target: T, source: U): T & U {
+    type Result = T & U;
+    let result: Result = ({} as Result);
+    for (const key in target) {
+      if (target.hasOwnProperty(key)) {
+        (result as any)[key] = target[key];
+      }
+    }
+    for (const key in source) {
+      if (source.hasOwnProperty(key)) {
+        (<any>result)[key] = source[key];
+      }
+    }
+    return result;
+  }
+
+  let o = extend({
+    name: 1
+  }, {
+      go: '2'
+    })
+}
+
+{
+  // 联合类型
+
+  interface Bird {
+    fly();
+    jiao();
+  }
+  interface Fish {
+    swim();
+    jiao();
+  }
+  // 自定义类型保护 （pet is Fish 是类型谓词）
+  function isFish(pet: Fish | Bird): pet is Fish {
+    return (<Fish>pet).swim !== undefined
+  }
+
+  function getPet(): Fish | Bird {
+    return {
+      fly() {
+
+      },
+      jiao() {
+
+      }
+    }
+  }
+
+
+  let pet = getPet();
+  pet.jiao();
+  // pet.swim();
+
+  // 不使用自定义的类型保护
+  if ((<Fish>pet).swim) {
+    (<Fish>pet).swim();
+  } else {
+    (<Bird>pet).fly();
+  }
+
+  // 使用自定义的类型保护
+  if (isFish(pet)) {
+    pet.swim();
+  } else {
+    pet.fly();
+  }
+
+
+}
+
+
+{
+  // 映射类型
+
+  type Friends = 'zhangsan' | 'lisi';
+  
+  type FriendsAge = {
+    [K in Friends]: number
+  }
+
+  const friendsAge: FriendsAge = {
+    zhangsan: 15,
+    lisi: 11,
+    wangwu: 12,
+  }
+  
+
+  type Readonly<T> = {
+    readonly [P in keyof T]: T[P];
+  }
+  type Partial<T> = {
+    [P in keyof T]?: T[P];
+  }
+  type Pick<T, K extends keyof T> = {
+    [P in K]: T[P]
+  }
+  type Record<K extends string, T> = {
+    [P in K]: T;
+  }
+
+  interface Person {
+    name: string,
+    age: number
+  }
+
+  let p: Partial<Person> = {
+    name: 'nihao'
+  }
+
+  const p2: Readonly<Person> = {
+    name: 'ronffy',
+    age: 12
+  }
+
+  let p3: Pick<Person, 'name'> = {
+    name: 'ranici'
+  }
+
+  console.log(p3);
+  
+
+
+
+  
+}
+
