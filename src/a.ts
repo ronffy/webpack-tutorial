@@ -1,5 +1,12 @@
 import doIt from './utils/doIt'
 
+import zzzzzz, { OO } from '../node_modules/zzzzzz';
+import redux from '../node_modules/redux';
+
+let u: OO = zzzzzz(3)
+
+let a = redux;
+
 export function f1(sign: string) {
   return 'xxx' + sign
 }
@@ -272,6 +279,28 @@ console.log('cName:', Color[0]);
   }
 
 
+
+  // 解决 Document.getElementById() 可能为null的情况：
+
+  // 第一种，通过类型判断的方式[推荐]
+  // 检查document是否为null
+  let element = document.getElementById('root');
+  if (element) {
+    element.onclick = function () {
+      Promise.all([import('./a'), import('./b')]).then(([a, b]) => {
+        console.log('111', a.f1('4'));
+        console.log('222', b.default('5'));
+      })
+    }
+  }
+
+  // 第二种方式，用类型断言的方式
+  document.getElementById('root')!.onclick = function () {
+    Promise.all([import('./a'), import('./b')]).then(([a, b]) => {
+      console.log('111', a.f1('4'));
+      console.log('222', b.default('5'));
+    })
+  }
 }
 
 

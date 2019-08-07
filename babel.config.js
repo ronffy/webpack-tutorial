@@ -17,7 +17,9 @@ module.exports = function (api) {
     [
       '@babel/preset-env',
       {
-        targets: '> 0.25%, not dead',
+        targets: {
+          node: 'current'
+        },
         useBuiltIns: 'usage',
         modules: false, // 是否启用将ES6模块语法转换为其他模块类型（如果想要 tree shaking，此处必须为false）
         corejs: {

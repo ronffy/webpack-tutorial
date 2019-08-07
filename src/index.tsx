@@ -1,25 +1,29 @@
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import axios from 'axios';
 import { apis } from './config';
+import C3 from './C3';
+import { UUU } from './utils/doIt';
 import './index.less';
+
+
+let u = new UUU();
+// console.log('u.doit', u.doit());
+// console.log('u.doit2', UUU.doit2());
+
 
 if (module.hot) {
   module.hot.accept('./a', function () {
-    
+
   })
 }
 
-const Com = () => <div>text</div>;
-console.log('Com', Com);
+ReactDOM.render(
+  <C3 />,
+  document.getElementById('root')
+)
 
-document.getElementById('root').onclick = function () {
-  Promise.all([import('./a'), import('./b')]).then(([a, b]) => {
-    console.log('111', a.f1('4'));
-    console.log('222', b.default('5'));
-    console.log('Com', Com);
-  })
-}
 
 
 async function getData() {
