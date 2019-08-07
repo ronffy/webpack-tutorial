@@ -3,15 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import { apis } from './config';
-import C3 from './C3';
-import { UUU } from './utils/doIt';
+import App from './App';
 import './index.less';
-
-
-let u = new UUU();
-// console.log('u.doit', u.doit());
-// console.log('u.doit2', UUU.doit2());
-
 
 if (module.hot) {
   module.hot.accept('./a', function () {
@@ -20,7 +13,7 @@ if (module.hot) {
 }
 
 ReactDOM.render(
-  <C3 />,
+  <App />,
   document.getElementById('root')
 )
 

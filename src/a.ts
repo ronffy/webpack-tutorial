@@ -1,11 +1,7 @@
 import doIt from './utils/doIt'
 
-import zzzzzz, { OO } from '../node_modules/zzzzzz';
 import redux from '../node_modules/redux';
 
-let u: OO = zzzzzz(3)
-
-let a = redux;
 
 export function f1(sign: string) {
   return 'xxx' + sign
@@ -26,7 +22,7 @@ console.log('cName:', Color[0]);
   // readonly
   let a: number[] = [1, 2];
   let b: ReadonlyArray<number> = a;
-  b[1] = 3; // error 
+  // b[1] = 3; // error 
 
   let c = b as number[]; // 可以用断言重写
   c[1] = 3;
@@ -316,7 +312,7 @@ console.log('cName:', Color[0]);
   const friendsAge: FriendsAge = {
     zhangsan: 15,
     lisi: 11,
-    wangwu: 12,
+    // wangwu: 12,
   }
   
 

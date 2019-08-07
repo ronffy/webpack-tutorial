@@ -5,6 +5,24 @@ const MyWebpackPlugin = require('../my-webpack-plugin');
 const { mockApiToApp } = require('mockjs-server-cli');
 const mockData = require('../mock.config.js');
 
+const mergeRules = merge.smart({
+  loaders: [
+    {
+      test: /\.(le|c)ss$/,
+      use: [
+        {
+          loader: 'style-loader'
+        }
+      ]
+    }
+  ]
+}, {
+    loaders: rules
+}).loaders;
+
+console.log('mergeRules', mergeRules);
+
+
 module.exports = function (env, ...args) {
   const mode = env.production ? 'production' : 'development';
 
@@ -25,7 +43,7 @@ module.exports = function (env, ...args) {
     plugins,
 
     module: {
-      rules,
+      rules: mergeRules
     },
 
     watchOptions: {

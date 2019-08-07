@@ -5,13 +5,21 @@ import {
   InputHTMLAttributes,
 } from 'react';
 
-export interface NodeProps<T = HTMLDivElement> {
-  children?: ReactNode;
-  style?: CSSProperties;
-  className?: string;
-  onClick?: MouseEventHandler<T>;
-  onDoubleClick?: MouseEventHandler<T>;
-  onSelect?: MouseEventHandler<T>;
-}
+export type OnClick<T = HTMLDivElement> = MouseEventHandler<T>;
+
+export type OnDoubleClick<T = HTMLDivElement> = MouseEventHandler<T>;
+
+export type OnSelect<T = HTMLDivElement> = MouseEventHandler<T>;
+
+export type CSSProperties = CSSProperties;
+
+export type NodeProps<T = HTMLDivElement> = Partial<{
+  children: ReactNode;
+  style: CSSProperties;
+  className: string;
+  onClick: OnClick<T>;
+  onDoubleClick: OnDoubleClick<T>;
+  onSelect: OnSelect<T>;
+}>
 
 export interface InputProps<T = HTMLInputElement> extends InputHTMLAttributes<T> {}
