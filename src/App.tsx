@@ -3,6 +3,7 @@ import * as React from 'react';
 import InputBox from './components/InputBox';
 import ButtonCounter from './components/ButtonCounter';
 import Collapse from './components/Collapse';
+import TabsContainer from './TabsContainer';
 
 const App = () => (
   <div>
@@ -20,6 +21,21 @@ const App = () => (
           id: 2,
           title: '折叠面板标题2',
           content: '折叠面板内容2',
+        }
+      ]}
+    />
+    <TabsContainer
+      activeKey="tab2"
+      tabs={[
+        {
+          key: 'tab1',
+          tab: 'tab标题1',
+          content: 'tab内容1',
+        },
+        {
+          key: 'tab2',
+          tab: 'tab标题2',
+          content: 'tab内容2',
         }
       ]}
     />

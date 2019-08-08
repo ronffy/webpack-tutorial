@@ -4,6 +4,7 @@
   from {
     width: @baseWidth;
   }
+
   to {
     width: 100px;
   }
@@ -30,4 +31,16 @@
 * {
   margin: 0;
   padding: 0;
+}
+
+
+/* 兼容到IE8 */
+.clearfix:before,
+.clearfix:after {
+  content: "";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
 }

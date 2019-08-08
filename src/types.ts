@@ -11,8 +11,6 @@ export type OnDoubleClick<T = HTMLDivElement> = MouseEventHandler<T>;
 
 export type OnSelect<T = HTMLDivElement> = MouseEventHandler<T>;
 
-export type CSSProperties = CSSProperties;
-
 export type NodeProps<T = HTMLDivElement> = Partial<{
   children: ReactNode;
   style: CSSProperties;

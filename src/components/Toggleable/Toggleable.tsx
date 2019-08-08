@@ -14,7 +14,7 @@ type Props = Partial<{
 
 type RenderCallback = (args: ToggleableComponentProps) => JSX.Element;
 
-interface ToggleableComponentProps {
+export type ToggleableComponentProps = {
   show: State['show'],
   toggle: Toggleable['toggle'],
 }

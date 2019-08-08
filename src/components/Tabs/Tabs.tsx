@@ -1,0 +1,119 @@
+import React, { SFC, ReactNode, MouseEventHandler } from 'react';
+import TabPane, { Props as TabPaneProps } from './TabPane';
+import TabContent, { Props as TabContentProps } from './TabContent';
+import classNames from 'classnames';
+import './index.less';
+
+type Props = Partial<{
+  activeKey: string,
+  onChange: (activeKey: string, index: number) => void,
+  onTabClick: MouseEventHandler,
+}>
+
+type State = Readonly<{
+  activeKey: string;
+}>
+
+
+function getDefaultActiveKey(props) {
+  let activeKey: Props['activeKey'] = '';
+  React.Children.forEach(props.children, (child) => {
+    if (activeKey) {
+      return;
+    }
+    if (child && !child.props.disabled) {
+      activeKey = child.key;
+    }
+  });
+  return activeKey;
+}
+
+
+const defaultProps = {
+
+}
+
+class Tabs extends React.Component<Props, State> {
+  static defaultProps = defaultProps;
+
+  static TabPane = TabPane;
+
+  constructor(props: Props) {
+    super(props);
+    let activeKey: State['activeKey'];
+    if (props.activeKey) {
+      activeKey = props.activeKey;
+    } else {
+      activeKey = getDefaultActiveKey(props);
+    }
+    this.state = {
+      activeKey
+    }
+  }
+
+  private handleChange = (activeKey, index) => {
+    const { onChange } = this.props;
+    this.setState({
+      activeKey,
+    })
+    onChange && onChange(activeKey, index);
+  }
+
+  private renderTabs = () => {
+    const { activeKey } = this.state;
+    const { children, onTabClick } = this.props;
+    let tabBar: ReactNode[] = [];
+    let tabContent: ReactNode[] = [];
+
+    React.Children.forEach(children, (child, index) => {
+      if (!React.isValidElement(child)) {
+        return;
+      }
+      const _props: TabPaneProps = child.props;
+      const { tab, children } = _props;
+      const key = child.key;
+
+      const tabBarClassName = classNames('tabs-tab', {
+        'tabs-tab-active': key === activeKey
+      });
+      tabBar.push(
+        <div
+          className={tabBarClassName}
+          onClick={() => this.handleChange(key, index)}
+        >
+          {tab}
+        </div>
+      );
+
+      tabContent.push(
+        React.cloneElement(child, {
+          ..._props,
+          key: key!,
+        }, <TabContent
+          tabKey={key!}
+          activeKey={activeKey}
+          onTabClick={onTabClick}
+        >
+            {children}
+          </TabContent>)
+      );
+    });
+
+    return (
+      <>
+        <div className="tabs-nav clearfix">
+          {tabBar}
+        </div>
+        <div className="tabs-content clearfix">
+          {tabContent}
+        </div>
+      </>
+    )
+  }
+
+  render() {
+    return this.renderTabs();
+  }
+}
+
+export default Tabs;

@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, SFC } from 'react';
 import Panel, { Props as PanelProps } from './Panel';
 
 interface Item {
@@ -11,7 +11,7 @@ interface Props {
   menu: Item[]
 }
 
-const Collapse = ({ menu }: Props) => (
+const Collapse: SFC<Props> = ({ menu }: Props) => (
   <>
     {menu.map(({ id, title, content }) => (
       <React.Fragment key={id}>
