@@ -20,9 +20,6 @@ const mergeRules = merge.smart({
     loaders: rules
 }).loaders;
 
-console.log('mergeRules', mergeRules);
-
-
 module.exports = function (env, ...args) {
   const mode = env.production ? 'production' : 'development';
 

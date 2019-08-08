@@ -5,7 +5,7 @@ export type Props = {
   title: string,
 }
 
-const CollapseItem: SFC<Props> = ({ title, children }) => (
+const Panel: SFC<Props> = ({ title, children }) => (
   <Toggleable>
     {({ show, toggle }) => (
       <div style={{ border: '1px solid #ccc' }}>
@@ -19,4 +19,4 @@ const CollapseItem: SFC<Props> = ({ title, children }) => (
     )}
   </Toggleable>
 )
-export default CollapseItem;
+export default Panel;

@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react';
-import CollapseItem, { Props as CollapseItemProps } from './CollapseItem';
+import Panel, { Props as PanelProps } from './Panel';
 
 interface Item {
   id: string | number,
-  title: CollapseItemProps['title'],
+  title: PanelProps['title'],
   content: ReactNode,
 }
 
@@ -15,7 +15,7 @@ const Collapse = ({ menu }: Props) => (
   <>
     {menu.map(({ id, title, content }) => (
       <React.Fragment key={id}>
-        <CollapseItem title={title}>{content}</CollapseItem>
+        <Panel title={title}>{content}</Panel>
       </React.Fragment>
     ))}
   </>
