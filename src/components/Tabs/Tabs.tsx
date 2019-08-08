@@ -1,6 +1,6 @@
-import React, { SFC, ReactNode, MouseEventHandler } from 'react';
+import React, { ReactNode, MouseEventHandler } from 'react';
 import TabPane, { Props as TabPaneProps } from './TabPane';
-import TabContent, { Props as TabContentProps } from './TabContent';
+import TabContent from './TabContent';
 import classNames from 'classnames';
 import './index.less';
 

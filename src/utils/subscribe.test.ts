@@ -1,7 +1,5 @@
 
-const { dobu, subscribe, SUBSCRIBE_ERROR_MSG } = require('./dobu');
-
-// import doIt from './doIt';
+import subscribe from './subscribe';
 
 describe('测试 utils', () => {
 
@@ -9,17 +7,10 @@ describe('测试 utils', () => {
     console.log('beforeAll');
   })
 
-  test('dobu', () => {
-    const result = dobu('ronffy');
-    expect(result).toEqual('doit-ronffy');
-    expect(result).toHaveLength(11);
-  })
-
-
   test('subscribe', () => {
    
     const listener = function () { }
-    const listeners = [];
+    const listeners: (typeof listener)[] = [];
 
     const unsubscribe = subscribe(listener, listeners);
     expect(listeners.indexOf(listener))
@@ -30,8 +21,6 @@ describe('测试 utils', () => {
       .toBe(false);
 
   })
-
-
 
 
   afterAll(() => {

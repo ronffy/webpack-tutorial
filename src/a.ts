@@ -1,31 +1,9 @@
-import doIt from './utils/doIt'
 
-import redux from '../node_modules/redux';
-
-
-export function f1(sign: string) {
-  return 'xxx' + sign
-}
-
-export function f2(sign: string) {
-  return 'yyy' + doIt(sign)
-}
-
-enum Color { Red, Green };
-
-let c: Color = Color.Green;
-
-console.log('c:', c);
-console.log('cName:', Color[0]);
 
 {
   // readonly
   let a: number[] = [1, 2];
   let b: ReadonlyArray<number> = a;
-  // b[1] = 3; // error 
-
-  let c = b as number[]; // 可以用断言重写
-  c[1] = 3;
 }
 
 {
@@ -56,58 +34,6 @@ console.log('cName:', Color[0]);
   }
 
   let p = new Person(3);
-}
-
-{
-  // this
-  interface Person {
-    foods: string[];
-    eat: (index: number) => () => string;
-  }
-
-  let person: Person = {
-    foods: ['apple', 'orange'],
-    eat(index: number) {
-      return () => {
-        return this.foods[index];
-      }
-    }
-  }
-
-  const getFoot = person.eat(2);
-  const foot = getFoot();
-  console.log(foot);
-}
-
-
-{
-  // 重载
-
-  const pokers = [
-    { color: 'red', tally: 1 },
-    { color: 'black', tally: 2 },
-    { color: 'red', tally: 11 },
-    { color: 'black', tally: 5 },
-  ];
-  interface Card {
-    color: string;
-    tally: number;
-  }
-
-  function getCard(x: number): Card
-  function getCard(x: Card[]): Card
-  function getCard(x): any {
-    if (typeof x === 'number') {
-      return pokers[x];
-    }
-    if (Array.isArray(x)) {
-      return x[Math.floor(Math.random() * x.length)]
-    }
-  }
-  const card1 = getCard(2);
-  const card2 = getCard([{ color: 'red', tally: 1 }]);
-  console.log(card1);
-  console.log(card2);
 }
 
 
@@ -171,9 +97,6 @@ console.log('cName:', Color[0]);
     return obj[key];
   }
   let v = getProperty({ name: 'x', age: 12 }, 'age');
-
-
-
 }
 
 
@@ -188,8 +111,6 @@ console.log('cName:', Color[0]);
       console.log('参数输入错误');
       return;
     }
-    // console.log(hi.length);
-    // console.log(hi!.length);
 
     if (c === Color.RED) {
       console.log('我是红色的');
@@ -274,29 +195,6 @@ console.log('cName:', Color[0]);
     pet.fly();
   }
 
-
-
-  // 解决 Document.getElementById() 可能为null的情况：
-
-  // 第一种，通过类型判断的方式[推荐]
-  // 检查document是否为null
-  let element = document.getElementById('root');
-  if (element) {
-    element.onclick = function () {
-      Promise.all([import('./a'), import('./b')]).then(([a, b]) => {
-        console.log('111', a.f1('4'));
-        console.log('222', b.default('5'));
-      })
-    }
-  }
-
-  // 第二种方式，用类型断言的方式
-  document.getElementById('root')!.onclick = function () {
-    Promise.all([import('./a'), import('./b')]).then(([a, b]) => {
-      console.log('111', a.f1('4'));
-      console.log('222', b.default('5'));
-    })
-  }
 }
 
 
@@ -325,9 +223,9 @@ console.log('cName:', Color[0]);
   type Pick<T, K extends keyof T> = {
     [P in K]: T[P]
   }
-  type Record<K extends string, T> = {
-    [P in K]: T;
-  }
+  // type Record<K extends string, T> = {
+  //   [P in K]: T;
+  // }
 
   interface Person {
     name: string,
@@ -347,11 +245,5 @@ console.log('cName:', Color[0]);
     name: 'ranici'
   }
 
-  console.log(p3);
-  
-
-
-
-  
 }
 
