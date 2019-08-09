@@ -1,5 +1,5 @@
 
-import isFunction from './isFunction';
+import isFunction from '../src/utils/isFunction';
 import { 
   fn,
   asyncFn,
@@ -13,11 +13,11 @@ import {
   proxy,
   symbol,
   generator,
-} from '../jest';
+} from '../src/jest';
 
 
 
-test('test isFunction', () => {
+test('test utils isFunction', () => {
   expect(isFunction(fn)).toBeTruthy();
   expect(isFunction(asyncFn)).toBeTruthy();
   expect(isFunction(generator)).toBeTruthy();

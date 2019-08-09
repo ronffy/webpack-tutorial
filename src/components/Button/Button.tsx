@@ -2,7 +2,7 @@ import React, { SFC } from 'react';
 import { OnClick } from '../../types';
 
 interface Props {
-  onClick: OnClick<HTMLButtonElement>,
+  onClick?: OnClick<HTMLButtonElement>,
   color?: string,
 }
 

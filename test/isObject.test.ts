@@ -1,5 +1,5 @@
 
-import isObject from './isObject';
+import isObject from '../src/utils/isObject';
 import {
   fn,
   asyncFn,
@@ -13,10 +13,10 @@ import {
   proxy,
   symbol,
   generator,
-} from '../jest';
+} from '../src/jest';
 
 
-test('test isObject', () => {
+test('test utils isObject', () => {
   expect(isObject(array)).toBeTruthy();
   expect(isObject(object)).toBeTruthy();
   expect(isObject(fn)).toBeTruthy();

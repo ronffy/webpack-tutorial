@@ -9,12 +9,6 @@ module.exports = function (api) {
 
   const presets = [
     [
-      '@babel/preset-react',
-      {
-        development: isDevelopment
-      }
-    ],
-    [
       '@babel/preset-env',
       {
         targets: {
@@ -26,6 +20,12 @@ module.exports = function (api) {
           version: 2, 
           proposals: true
         }
+      }
+    ],
+    [
+      '@babel/preset-react',
+      {
+        development: isDevelopment
       }
     ],
     [

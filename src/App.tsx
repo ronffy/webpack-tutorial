@@ -3,13 +3,14 @@ import * as React from 'react';
 import InputBox from './components/InputBox';
 import ButtonCounter from './components/ButtonCounter';
 import Collapse from './components/Collapse';
-import TabsContainer from './TabsContainer';
+import TabsContainer from './containers/TabsContainer';
 
 const App = () => (
   <div>
     <InputBox />
     <hr />
     <ButtonCounter />
+    <hr />
     <Collapse
       menu={[
         {

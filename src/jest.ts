@@ -9,8 +9,6 @@ const object = {};
 const fn = function () { }
 const asyncFn = async function () { }
 const promise = Promise.resolve();
-const promiseResolve = Promise.resolve();
-const promiseReject = Promise.reject();
 const proxy = new Proxy({}, {});
 const symbol = Symbol('x');
 const generator = function* () { }
@@ -26,8 +24,6 @@ export {
   _null,
   _undef,
   promise,
-  promiseResolve,
-  promiseReject,
   proxy,
   symbol,
   generator,

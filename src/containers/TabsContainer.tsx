@@ -1,6 +1,6 @@
 
 import * as React from 'react';
-import Tabs from './components/Tabs';
+import Tabs from '../components/Tabs';
 const { TabPane } = Tabs;
 
 type PaneProps = {
@@ -31,7 +31,7 @@ class TabsContainer extends React.PureComponent<Props ,State> {
     })
   }
 
-  handleClick = (e) => {
+  handleClick = () => {
     
   }
   render() {
