@@ -1,8 +1,7 @@
 import { createBrowserHistory } from 'history';
-import { BrowserRouter, Link, Route } from 'react-router-dom';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import { routerReducer, routerMiddleware } from 'react-router-redux';
+import { routerMiddleware } from 'react-router-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import reducers from './reducers';
 
@@ -16,7 +15,3 @@ const middleware = applyMiddleware(
 const store = createStore(reducers, composeWithDevTools(middleware));
 
 export default store;
-
-export {
-  history
-}
