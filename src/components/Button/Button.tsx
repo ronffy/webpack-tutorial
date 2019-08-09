@@ -1,5 +1,5 @@
 import React, { SFC } from 'react';
-import { OnClick } from '../../types';
+import { OnClick } from '../../config/types';
 
 interface Props {
   onClick?: OnClick<HTMLButtonElement>,

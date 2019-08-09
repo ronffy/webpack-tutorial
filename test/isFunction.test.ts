@@ -13,7 +13,7 @@ import {
   proxy,
   symbol,
   generator,
-} from '../src/jest';
+} from '../src/config/jest';
 
 
 

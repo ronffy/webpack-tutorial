@@ -1,5 +1,5 @@
 import React, { SFC } from 'react';
-import { NodeProps } from '../../types';
+import { NodeProps } from '../../config/types';
 
 interface Props extends NodeProps {
   name: string;

@@ -1,5 +1,5 @@
 import React, { SFC } from 'react';
-import { InputProps } from '../../types';
+import { InputProps } from '../../config/types';
 
 const Input: SFC<InputProps> = React.memo((props: InputProps) => {
   const { onChange, value, placeholder } = props;

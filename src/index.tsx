@@ -2,15 +2,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import { apis } from './config';
+import { apis } from './config/config';
 import App from './App';
-import './index.less';
-
-if (module.hot) {
-  module.hot.accept('./a', function () {
-
-  })
-}
 
 ReactDOM.render(
   <App />,
