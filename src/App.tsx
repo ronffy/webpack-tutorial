@@ -5,16 +5,12 @@ import Home from './containers/Home';
 import PersonalManage from './containers/PersonalManage';
 import Detail from './containers/Detail';
 import About from './containers/About';
+import Menu from './components/Menu';
 
 const Routers = () => {
   return (
     <BrowserRouter>
-      <div>
-        <NavLink to="/home" >首页</NavLink>
-        <NavLink to="/personal" >个人中心</NavLink>
-        <NavLink to="/detail" >详情</NavLink>
-        <NavLink to="/about" >关于</NavLink>
-      </div>
+      <Menu style={{ marginBottom: '15px' }} />
       <Switch>
         <Route path="/home" exact component={Home} ></Route>
         <Route path="/personal" exact component={PersonalManage} ></Route>
