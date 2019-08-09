@@ -1,47 +1,28 @@
 
 import * as React from 'react';
-import InputBox from './components/InputBox';
-import ButtonCounter from './components/ButtonCounter';
-import Collapse from './components/Collapse';
-import TabsContainer from './containers/TabsContainer';
-import './app.less';
+import { BrowserRouter, NavLink, Route, Switch } from 'react-router-dom';
+import Home from './containers/Home';
+import PersonalManage from './containers/PersonalManage';
+import Detail from './containers/Detail';
+import About from './containers/About';
 
-const App = () => (
-  <div>
-    <InputBox />
-    <hr />
-    <ButtonCounter />
-    <hr />
-    <Collapse
-      menu={[
-        {
-          id: 1,
-          title: '折叠面板标题1',
-          content: '折叠面板内容1',
-        },
-        {
-          id: 2,
-          title: '折叠面板标题2',
-          content: '折叠面板内容2',
-        }
-      ]}
-    />
-    <TabsContainer
-      activeKey="tab2"
-      tabs={[
-        {
-          key: 'tab1',
-          tab: 'tab标题1',
-          content: 'tab内容1',
-        },
-        {
-          key: 'tab2',
-          tab: 'tab标题2',
-          content: 'tab内容2',
-        }
-      ]}
-    />
-  </div>
-)
+const Routers = () => {
+  return (
+    <BrowserRouter>
+      <div>
+        <NavLink to="/home" >首页</NavLink>
+        <NavLink to="/personal" >个人中心</NavLink>
+        <NavLink to="/detail" >详情</NavLink>
+        <NavLink to="/about" >关于</NavLink>
+      </div>
+      <Switch>
+        <Route path="/home" exact component={Home} ></Route>
+        <Route path="/personal" exact component={PersonalManage} ></Route>
+        <Route path="/detail" exact component={Detail} ></Route>
+        <Route path="/about" exact component={About} ></Route>
+      </Switch>
+    </BrowserRouter>
+  )
+}
 
-export default App;
+export default Routers
