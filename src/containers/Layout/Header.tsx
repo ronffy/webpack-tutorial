@@ -2,33 +2,35 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
-import Menu from '../../components/Menu';
+import Menu, { ClickParam } from '../../components/Menu';
 const MenuItem = Menu.Item;
 
-console.log(push);
+type Props = {
+  onClickMemuItem: (param: ClickParam) => void,
+  menuSelectedKeys: string[],
+  menuOpenKeys: string[],
+}
 
+class Header extends React.PureComponent<Props> {
 
-class Header extends React.PureComponent {
-
-  _handleClickMenuItem = (o) => {
+  _handleClickMenuItem = (o: ClickParam) => {
     const { onClickMemuItem } = this.props;
     onClickMemuItem(o);
   }
 
   render() {
     const { 
-      menus, 
+      // menus, 
       menuSelectedKeys, 
       menuOpenKeys,
-      onClickMemuItem,
-      onMenuOpenChange,
+      // onMenuOpenChange,
     } = this.props;
     return (
       <Menu
         openKeys={menuOpenKeys}
         selectedKeys={menuSelectedKeys}
         onClick={this._handleClickMenuItem}
-        onOpenChange={onMenuOpenChange}
+        // onOpenChange={onMenuOpenChange}
       >
         <MenuItem key="/home" >菜单1</MenuItem>
         <MenuItem key="/detail">菜单2</MenuItem>
@@ -46,7 +48,7 @@ const mapStateToProps = ({ app }) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onClickMemuItem({ key, keyPath, item, domEvent }) {
+  onClickMemuItem({ key, item, domEvent }: ClickParam) {
     dispatch({
       type: 'APP_UPDATESTATE',
       payload: {

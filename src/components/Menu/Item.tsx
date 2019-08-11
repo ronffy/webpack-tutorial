@@ -3,7 +3,6 @@ import classNames from 'classnames';
 
 interface Props {
   onClick?: MouseEventHandler<HTMLDivElement>
-  to: string,
   className?: string,
 }
 
