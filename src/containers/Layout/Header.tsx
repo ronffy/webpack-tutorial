@@ -30,10 +30,10 @@ class Header extends React.PureComponent {
         onClick={this._handleClickMenuItem}
         onOpenChange={onMenuOpenChange}
       >
-        <MenuItem key="menu1" to="/home" >菜单1</MenuItem>
-        <MenuItem key="menu2" to="/detail">菜单2</MenuItem>
-        <MenuItem key="menu3" to="/personal">菜单3</MenuItem>
-        <MenuItem key="menu4" to="/about">菜单4</MenuItem>
+        <MenuItem key="/home" >菜单1</MenuItem>
+        <MenuItem key="/detail">菜单2</MenuItem>
+        <MenuItem key="/personal">菜单3</MenuItem>
+        <MenuItem key="/about">菜单4</MenuItem>
       </Menu>
     )
   }
@@ -53,7 +53,7 @@ const mapDispatchToProps = (dispatch) => ({
         menuSelectedKeys: [key]
       }
     })
-    dispatch(push(item.to));
+    dispatch(push(key));
   },
   onMenuOpenChange(openKeys) {
     dispatch({
