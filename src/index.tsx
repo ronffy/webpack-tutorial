@@ -1,13 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import store from './store';
-import App from './App';
 import { Provider } from 'react-redux';
-import './index.less';
+import { ConnectedRouter } from 'connected-react-router';
+import store, { history } from './store';
+import App from './App';
+import './style/index.less';
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <ConnectedRouter history={history}>
+      <App />
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('root')
 )
