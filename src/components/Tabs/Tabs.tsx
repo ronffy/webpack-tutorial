@@ -18,10 +18,10 @@ type State = Readonly<{
 function getDefaultActiveKey(props) {
   let activeKey: Props['activeKey'] = '';
   React.Children.forEach(props.children, (child) => {
-    if (activeKey) {
+    if (activeKey || !child) {
       return;
     }
-    if (child && !child.props.disabled) {
+    if (!child.props.disabled) {
       activeKey = child.key;
     }
   });
@@ -71,15 +71,15 @@ class Tabs extends React.Component<Props, State> {
       }
       const _props: TabPaneProps = child.props;
       const { tab, children } = _props;
-      const key = child.key;
+      const _key = child.key;
 
       const tabBarClassName = classNames('tabs-tab', {
-        'tabs-tab-active': key === activeKey
+        'tabs-tab-active': _key === activeKey
       });
       tabBar.push(
         <div
           className={tabBarClassName}
-          onClick={() => this.handleChange(key, index)}
+          onClick={() => this.handleChange(_key, index)}
         >
           {tab}
         </div>
@@ -88,9 +88,9 @@ class Tabs extends React.Component<Props, State> {
       tabContent.push(
         React.cloneElement(child, {
           ..._props,
-          key: key!,
+          key: _key!,
         }, <TabContent
-          tabKey={key!}
+          tabKey={_key!}
           activeKey={activeKey}
           onTabClick={onTabClick}
         >

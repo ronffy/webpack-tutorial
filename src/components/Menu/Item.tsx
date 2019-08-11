@@ -1,27 +1,23 @@
-import React, { SFC } from 'react';
+import React, { SFC, MouseEventHandler } from 'react';
+import classNames from 'classnames';
 
 interface Props {
-  onClick?: OnClick<HTMLButtonElement>,
-  color?: string,
-}
-
-const defaultProps = {
-  color: 'blue',
+  onClick?: MouseEventHandler<HTMLDivElement>
+  to: string,
+  className?: string,
 }
 
 const Item: SFC<Props> = React.memo(({
   onClick,
-  color,
-  children
+  children,
+  className,
 }) => (
-    <button
+    <div
+      className={classNames('u-menu-item', className)}
       onClick={onClick}
-      style={{ color }}
     >
       {children}
-    </button>
+    </div>
   ));
-
-Item.defaultProps = defaultProps;
 
 export default Item;
