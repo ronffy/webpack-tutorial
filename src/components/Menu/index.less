@@ -1,10 +1,9 @@
 @import '../style/mixins/clearfix.less';
 
-.u-menu {
+.u-menu.horizontal {
   .clearfix;
 
   .u-menu-item {
-    float: left;
 
     &:not(first) {
       margin-left: 15px;
@@ -14,5 +13,38 @@
       color: aquamarine;
     }
   }
+
+}
+
+
+.u-menu.vertical {
+  border-right: 1px solid #ddd;
+
+  .u-menu-item {
+    padding: 7px 0;
+    padding-left: 15px;
+    color: #666;
+
+    &.active {
+      color: #000;
+      background: #eee;
+    }
+  }
+
+  .u-menu-sub {
+    color: #666;
+
+    .u-menu-sub-title {
+      padding: 7px 0;
+      padding-left: 15px;
+    }
+
+    >ul .u-menu-item {
+      padding: 7px 0;
+      padding-left: 30px;
+    }
+  }
+
+
 
 }

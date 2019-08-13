@@ -2,41 +2,43 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
-import Menu, { ClickParam } from '../../components/Menu';
+import Menu, { ClickParam, SubMenu, ClickSubParam } from '../../components/Menu';
 const MenuItem = Menu.Item;
 
 type Props = {
   onClickMemuItem: (param: ClickParam) => void,
+  onClickSubMenu: (param: ClickSubParam) => void,
+  onMenuOpenChange: (param: string[]) => void,
   menuSelectedKeys: string[],
   menuOpenKeys: string[],
 }
 
 class Header extends React.PureComponent<Props> {
 
-  _handleClickMenuItem = (o: ClickParam) => {
-    const { onClickMemuItem } = this.props;
-    onClickMemuItem(o);
-  }
-
   render() {
     const { 
       // menus, 
       menuSelectedKeys, 
       menuOpenKeys,
-      // onMenuOpenChange,
+      onMenuOpenChange,
+      onClickMemuItem,
     } = this.props;
     return (
-      <Menu
-        openKeys={menuOpenKeys}
-        selectedKeys={menuSelectedKeys}
-        onClick={this._handleClickMenuItem}
-        // onOpenChange={onMenuOpenChange}
-      >
-        <MenuItem key="/home" >菜单1</MenuItem>
-        <MenuItem key="/detail">菜单2</MenuItem>
-        <MenuItem key="/personal">菜单3</MenuItem>
-        <MenuItem key="/about">菜单4</MenuItem>
-      </Menu>
+      <div style={{ width: 200 }}>
+        <Menu
+          openKeys={menuOpenKeys}
+          selectedKeys={menuSelectedKeys}
+          onClick={onClickMemuItem}
+          onOpenChange={onMenuOpenChange}
+        >
+          <MenuItem key="/home">菜单1</MenuItem>
+          <MenuItem key="/detail">菜单2</MenuItem>
+          <SubMenu title="我" key="me" >
+            <MenuItem key="/personal">菜单3</MenuItem>
+            <MenuItem key="/about">菜单4</MenuItem>
+          </SubMenu>
+        </Menu>
+      </div>
     )
   }
 }
@@ -57,14 +59,15 @@ const mapDispatchToProps = (dispatch) => ({
     })
     dispatch(push(key));
   },
-  onMenuOpenChange(openKeys) {
+  onMenuOpenChange(openKeys: string[]) {
     dispatch({
       type: 'APP_UPDATESTATE',
       payload: {
         menuOpenKeys: [openKeys]
       }
     })
-  }
+  },
+
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

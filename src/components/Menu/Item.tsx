@@ -2,7 +2,7 @@ import React, { SFC, MouseEventHandler } from 'react';
 import classNames from 'classnames';
 
 interface Props {
-  onClick?: MouseEventHandler<HTMLDivElement>
+  onClick?: MouseEventHandler<HTMLLIElement>
   className?: string,
 }
 
@@ -11,12 +11,12 @@ const Item: SFC<Props> = React.memo(({
   children,
   className,
 }) => (
-    <div
+    <li
       className={classNames('u-menu-item', className)}
       onClick={onClick}
     >
       {children}
-    </div>
+    </li>
   ));
 
 export default Item;
