@@ -1,9 +1,9 @@
 @import '../style/mixins/clearfix.less';
 
-.u-menu.horizontal {
+.comp-menu.horizontal {
   .clearfix;
 
-  .u-menu-item {
+  .comp-menu-item {
 
     &:not(first) {
       margin-left: 15px;
@@ -17,10 +17,10 @@
 }
 
 
-.u-menu.vertical {
+.comp-menu.vertical {
   border-right: 1px solid #ddd;
 
-  .u-menu-item {
+  .comp-menu-item {
     padding: 7px 0;
     padding-left: 15px;
     color: #666;
@@ -31,17 +31,30 @@
     }
   }
 
-  .u-menu-sub {
+  .comp-menu-sub {
     color: #666;
 
-    .u-menu-sub-title {
-      padding: 7px 0;
-      padding-left: 15px;
+    .comp-menu-sub-title {
+      .clearfix;
+
+      padding: 7px 15px;
     }
 
-    >ul .u-menu-item {
-      padding: 7px 0;
-      padding-left: 30px;
+    >ul {
+      display: block;
+
+      .comp-menu-item {
+        padding: 7px 0;
+        padding-left: 30px;
+      }
+    }
+
+    &.active {
+      .comp-menu-sub-title {}
+
+      >ul {
+        display: none;
+      }
     }
   }
 

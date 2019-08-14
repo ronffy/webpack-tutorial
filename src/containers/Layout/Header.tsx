@@ -63,7 +63,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch({
       type: 'APP_UPDATESTATE',
       payload: {
-        menuOpenKeys: [openKeys]
+        menuOpenKeys: openKeys
       }
     })
   },

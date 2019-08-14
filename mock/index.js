@@ -9,6 +9,7 @@ function getUsers(count = 10) {
         'name': '@cname',
         'email': '@email',
         'phone': /^1[34578]\d{9}$/,
+        'type': /^(human|label|place){1}$/,
         'website': '@domain',
         'avatar': '@image("200x100", "@name")'
       }

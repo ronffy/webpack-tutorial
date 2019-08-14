@@ -6,11 +6,10 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const apis = {
+  preApi,
   api1: `${preApi}/web/users1`,
   api2: `${preApi}/app/users2`,
   api3: `${preApi}/app/users3`,
 }
 
-export {
-  apis
-}
+export default apis;
