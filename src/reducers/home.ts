@@ -3,6 +3,8 @@ import extendReducer from './extendReducer';
 import { Reducer } from 'redux';
 import { Action } from '../config/types';
 
+const namespace = 'home';
+
 interface CollapseItem {
   id: string | number
   title: string | ReactNode
@@ -24,4 +26,4 @@ const reducer: Reducer<HomeState, Action> = (state = initState, { payload, type 
   }
 };
 
-export default extendReducer<HomeState>(reducer);
+export default extendReducer<HomeState>(reducer, namespace);

@@ -3,6 +3,8 @@ import extendReducer from './extendReducer';
 import { Reducer } from 'redux';
 import { Action } from '../config/types';
 
+const namespace = 'app';
+
 export type AppState = {
   login: boolean
   menus: []
@@ -37,5 +39,5 @@ export default (history: History) => {
         return state;
     }
   }
-  return extendReducer(reducer);
+  return extendReducer(reducer, namespace);
 };

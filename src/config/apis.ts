@@ -10,6 +10,7 @@ const apis = {
   api1: `${preApi}/web/users1`,
   api2: `${preApi}/app/users2`,
   api3: `${preApi}/app/users3`,
+  homeCollapse: `${preApi}/homeCollapse`,
 }
 
 export default apis;

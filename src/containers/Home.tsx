@@ -3,6 +3,7 @@ import React, { SFC } from 'react';
 import { connect, MapDispatchToProps, DispatchProp, MapStateToProps } from 'react-redux';
 import Collapse from '../components/Collapse';
 import { RootState, Action } from '../config/types';
+import { createRequestCollapse } from '../actions/home';
 
 type OwnProps = {}
 
@@ -11,15 +12,15 @@ type StateProps = {
 }
 
 interface DispatchProps extends DispatchProp<Action> {
-  onRequestCollapseList(): void
+  createRequestCollapse(id: string | number): void
 }
 
 type Props = DispatchProps & StateProps & OwnProps
 
-const Home: SFC<Props> = ({ collapseList, onRequestCollapseList }) => {
+const Home: SFC<Props> = ({ collapseList, createRequestCollapse }) => {
 
   const handleClick = () => {
-    onRequestCollapseList && onRequestCollapseList();
+    createRequestCollapse && createRequestCollapse(3);
   }
   return (
     <>
@@ -37,24 +38,8 @@ const mapStateToProps: MapStateToProps<StateProps, OwnProps, RootState> = ({ hom
 
 const mapDispatchToProps: MapDispatchToProps<DispatchProps, OwnProps> = (dispatch) => ({
   dispatch,
-  onRequestCollapseList() {
-    dispatch({
-      type: 'updateState',
-      payload: {
-        collapseList: [
-          {
-            id: 1,
-            title: '折叠面板标题1',
-            content: '折叠面板内容1',
-          },
-          {
-            id: 2,
-            title: '折叠面板标题2',
-            content: '折叠面板内容2',
-          }
-        ]
-      }
-    })
+  createRequestCollapse(id: number | string) {
+    createRequestCollapse(id)(dispatch);
   }
 });
 

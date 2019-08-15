@@ -3,6 +3,8 @@ import { Reducer } from 'redux';
 import { Action } from '../config/types';
 import extendReducer from './extendReducer';
 
+const namespace = 'personal';
+
 interface Tab {
   key: string
   tab: string
@@ -43,4 +45,4 @@ const reducer: Reducer<PersonalState, Action> = (state = initState, { payload, t
   }
 };
 
-export default extendReducer(reducer);
+export default extendReducer(reducer, namespace);
