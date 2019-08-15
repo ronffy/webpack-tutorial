@@ -2,7 +2,7 @@ import React, { SFC } from 'react';
 import Toggleable from '../Toggleable';
 
 export type Props = {
-  title: string,
+  title: string
 }
 
 const Panel: SFC<Props> = ({ title, children }) => (

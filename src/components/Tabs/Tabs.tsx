@@ -5,13 +5,13 @@ import classNames from 'classnames';
 import './index.less';
 
 type Props = Partial<{
-  activeKey: string,
-  onChange: (activeKey: string, index: number) => void,
-  onTabClick: MouseEventHandler,
+  activeKey: string
+  onChange: (activeKey: string, index: number) => void
+  onTabClick: MouseEventHandler
 }>
 
 type State = Readonly<{
-  activeKey: string;
+  activeKey: string
 }>
 
 
@@ -31,7 +31,7 @@ function getDefaultActiveKey(props) {
 
 const defaultProps = {
 
-}
+};
 
 class Tabs extends React.Component<Props, State> {
   static defaultProps = defaultProps;

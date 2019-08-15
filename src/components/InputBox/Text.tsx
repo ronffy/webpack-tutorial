@@ -2,7 +2,7 @@ import React, { SFC } from 'react';
 import { NodeProps } from '../../config/types';
 
 interface Props extends NodeProps {
-  name: string;
+  name: string
 }
 
 const Text: SFC<Props> = React.memo((props: Props) => {

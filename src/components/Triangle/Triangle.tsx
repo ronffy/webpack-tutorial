@@ -3,18 +3,18 @@ import classNames from 'classnames';
 import { OnClick } from '../../config/types';
 import './index.less';
 
-enum ANGLE_TYPE { top = 'top', RIGHT = 'right', BOTTOM = 'bottom', LEFT = 'left' };
-enum ANGLE_SIZE { LARGE = 'large', SMALL = 'small', DEFAULT = 'default' };
+enum ANGLE_TYPE { top = 'top', RIGHT = 'right', BOTTOM = 'bottom', LEFT = 'left' }
+enum ANGLE_SIZE { LARGE = 'large', SMALL = 'small', DEFAULT = 'default' }
 
-type AngleType = 'top' | 'right' | 'bottom' | 'left';
-type AngleSize = 'large' | 'small' | 'default';
+type AngleType = 'top' | 'right' | 'bottom' | 'left'
+type AngleSize = 'large' | 'small' | 'default'
 
 interface Props {
-  onClick?: OnClick<HTMLDivElement>;
-  color?: string;
-  size?: AngleSize | number;
-  type?: AngleType;
-  className?: string;
+  onClick?: OnClick<HTMLDivElement>
+  color?: string
+  size?: AngleSize | number
+  type?: AngleType
+  className?: string
   style?: CSSProperties
 }
 
@@ -47,7 +47,7 @@ const Triangle: SFC<Props> = React.memo(({
         break;
     }
   } else if (typeof size !== 'number') {
-    console.warn('size 数据格式有误，已设置为默认值为7');
+    console.warn('size 数据格式有误，已设置为默认值7');
     size = defaultProps.size;
   }
 

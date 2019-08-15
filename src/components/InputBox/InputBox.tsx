@@ -5,9 +5,9 @@ import Text from './Text';
 const initState = {
   textVisible: true,
   inputValue: ''
-}
+};
 
-type State = Readonly<typeof initState>;
+type State = Readonly<typeof initState>
 
 class InputBox extends React.Component<any, State> {
   readonly state: State = initState;

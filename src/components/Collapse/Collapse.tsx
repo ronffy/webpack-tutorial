@@ -2,9 +2,9 @@ import React, { ReactNode, SFC } from 'react';
 import Panel, { Props as PanelProps } from './Panel';
 
 interface Item {
-  id: string | number,
-  title: PanelProps['title'],
-  content: ReactNode,
+  id: string | number
+  title: PanelProps['title']
+  content: ReactNode
 }
 
 interface Props {

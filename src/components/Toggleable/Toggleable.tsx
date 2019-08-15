@@ -3,20 +3,20 @@ import isFunction from '../../utils/isFunction';
 
 const initState = {
   show: false
-}
+};
 
-type State = Readonly<typeof initState>;
+type State = Readonly<typeof initState>
 
 type Props = Partial<{
-  children: RenderCallback,
-  render: RenderCallback,
+  children: RenderCallback
+  render: RenderCallback
 }>
 
-type RenderCallback = (args: ToggleableComponentProps) => JSX.Element;
+type RenderCallback = (args: ToggleableComponentProps) => JSX.Element
 
 export type ToggleableComponentProps = {
-  show: State['show'],
-  toggle: Toggleable['toggle'],
+  show: State['show']
+  toggle: Toggleable['toggle']
 }
 
 class Toggleable extends React.Component<Props, State> {

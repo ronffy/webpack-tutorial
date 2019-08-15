@@ -2,8 +2,8 @@ import React, { SFC } from 'react';
 import { OnClick } from '../../config/types';
 
 interface Props {
-  onClick?: OnClick<HTMLButtonElement>,
-  color?: string,
+  onClick?: OnClick<HTMLButtonElement>
+  color?: string
 }
 
 const defaultProps = {

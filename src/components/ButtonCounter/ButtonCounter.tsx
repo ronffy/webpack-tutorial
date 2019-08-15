@@ -3,9 +3,9 @@ import Button from '../Button';
 
 const initState = {
   count: 0
-}
+};
 
-type State = Readonly<typeof initState>;
+type State = Readonly<typeof initState>
 
 class ButtonCounter extends React.Component<any, State> {
   readonly state: State = initState;
@@ -33,7 +33,6 @@ class ButtonCounter extends React.Component<any, State> {
   }
 
 }
-
 
 const incrementCount = (prevState: State) => ({
   count: prevState.count + 1

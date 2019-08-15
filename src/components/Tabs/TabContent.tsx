@@ -2,10 +2,10 @@ import React, { SFC, ReactNode, MouseEventHandler } from 'react';
 import classNames from 'classnames';
 
 export type Props = {
-  activeKey: string | number | symbol,
-  tabKey: string | number | symbol,
-  children: ReactNode,
-  onTabClick?: MouseEventHandler,
+  activeKey: string | number | symbol
+  tabKey: string | number | symbol
+  children: ReactNode
+  onTabClick?: MouseEventHandler
 }
 
 const TabContent: SFC<Props> = ({ activeKey, tabKey, onTabClick, children }) => {
