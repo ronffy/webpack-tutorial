@@ -1,6 +1,7 @@
 
 import React, { SFC } from 'react';
 import { connect, MapDispatchToProps, DispatchProp, MapStateToProps } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
 import Collapse from '../components/Collapse';
 import { RootState, Action } from '../config/types';
 import { createRequestCollapse } from '../actions/home';
@@ -12,15 +13,18 @@ type StateProps = {
 }
 
 interface DispatchProps extends DispatchProp<Action> {
-  createRequestCollapse(id: string | number): void
+  onRequestCollapse(id: string | number): void
 }
+
+type TThunkDispatch<E> = ThunkDispatch<RootState, E, Action>
+
 
 type Props = DispatchProps & StateProps & OwnProps
 
-const Home: SFC<Props> = ({ collapseList, createRequestCollapse }) => {
+const Home: SFC<Props> = ({ collapseList, onRequestCollapse }) => {
 
   const handleClick = () => {
-    createRequestCollapse && createRequestCollapse(3);
+    onRequestCollapse && onRequestCollapse(3);
   }
   return (
     <>
@@ -38,8 +42,8 @@ const mapStateToProps: MapStateToProps<StateProps, OwnProps, RootState> = ({ hom
 
 const mapDispatchToProps: MapDispatchToProps<DispatchProps, OwnProps> = (dispatch) => ({
   dispatch,
-  createRequestCollapse(id: number | string) {
-    createRequestCollapse(id)(dispatch);
+  onRequestCollapse(id: number | string) {
+    (dispatch as TThunkDispatch<typeof id>)(createRequestCollapse(id));
   }
 });
 
