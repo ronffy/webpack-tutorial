@@ -1,8 +1,7 @@
 import * as React from 'react';
 import Tabs from '../components/Tabs';
-import { Action } from 'redux';
 import { connect, MapDispatchToProps, DispatchProp, MapStateToProps } from 'react-redux';
-import { RootState } from '../config/types';
+import { RootState, Action } from '../config/types';
 const { TabPane } = Tabs;
 
 type PaneProps = {

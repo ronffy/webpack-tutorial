@@ -2,8 +2,7 @@
 import * as React from 'react';
 import { connect, DispatchProp, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { push } from 'connected-react-router';
-import { Action } from 'redux';
-import { RootState } from '../../config/types';
+import { RootState, Action } from '../../config/types';
 import Menu, { ClickParam, SubMenu, ClickSubParam } from '../../components/Menu';
 const MenuItem = Menu.Item;
 

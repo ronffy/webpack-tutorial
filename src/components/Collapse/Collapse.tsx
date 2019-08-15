@@ -4,16 +4,16 @@ import Panel, { Props as PanelProps } from './Panel';
 interface Item {
   id: string | number
   title: PanelProps['title']
-  content: ReactNode
+  content: string | ReactNode
 }
 
 interface Props {
-  menu: Item[]
+  list: Item[]
 }
 
-const Collapse: SFC<Props> = ({ menu }: Props) => (
+const Collapse: SFC<Props> = ({ list }: Props) => (
   <>
-    {menu.map(({ id, title, content }) => (
+    {list.map(({ id, title, content }) => (
       <React.Fragment key={id}>
         <Panel title={title}>{content}</Panel>
       </React.Fragment>

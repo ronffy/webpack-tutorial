@@ -1,8 +1,8 @@
-import React, { SFC } from 'react';
+import React, { SFC, ReactNode } from 'react';
 import Toggleable from '../Toggleable';
 
 export type Props = {
-  title: string
+  title: string | ReactNode
 }
 
 const Panel: SFC<Props> = ({ title, children }) => (

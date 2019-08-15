@@ -1,13 +1,17 @@
+import { History } from 'history';
+import extendReducer from './extendReducer';
+import { Reducer } from 'redux';
+import { Action } from '../config/types';
 
 export type AppState = {
-  login: boolean;
-  menus: [];
-  menuOpenKeys: string[];
-  menuSelectedKeys: string[];
+  login: boolean
+  menus: []
+  menuOpenKeys: string[]
+  menuSelectedKeys: string[]
 }
 
-export default router => {
-  const pathname = router.location.pathname;
+export default (history: History) => {
+  const pathname = history.location.pathname;
   const initState: AppState = {
     login: false,
     menus: [],
@@ -15,7 +19,7 @@ export default router => {
     menuSelectedKeys: [pathname]
   };
 
-  return (state = initState, { payload, type }) => {
+  const reducer: Reducer<AppState, Action> = (state = initState, { payload, type }) => {
     switch (type) {
       case 'APP_LOGIN':
         return {
@@ -33,4 +37,5 @@ export default router => {
         return state;
     }
   }
-}
+  return extendReducer(reducer);
+};

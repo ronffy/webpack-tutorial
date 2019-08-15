@@ -1,14 +1,17 @@
 import { ReactNode } from 'react';
+import { Reducer } from 'redux';
+import { Action } from '../config/types';
+import extendReducer from './extendReducer';
 
 interface Tab {
-  key: string;
-  tab: string;
-  content: string | ReactNode;
+  key: string
+  tab: string
+  content: string | ReactNode
 }
 
 export type PersonalState = {
-  activeKey: string;
-  tabs: Tab[];
+  activeKey: string
+  tabs: Tab[]
 }
 
 const initState = {
@@ -27,7 +30,7 @@ const initState = {
   ]
 }
 
-export default (state: PersonalState = initState, { payload, type }) => {
+const reducer: Reducer<PersonalState, Action> = (state = initState, { payload, type }) => {
   switch (type) {
     case 'PERSONAL_ACTIVEKEY':
       return {
@@ -38,4 +41,6 @@ export default (state: PersonalState = initState, { payload, type }) => {
     default:
       return state;
   }
-}
+};
+
+export default extendReducer(reducer);
