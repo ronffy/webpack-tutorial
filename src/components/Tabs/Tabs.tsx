@@ -79,6 +79,7 @@ class Tabs extends React.Component<Props, State> {
       tabBar.push(
         <div
           className={tabBarClassName}
+          key={_key!}
           onClick={() => this.handleChange(_key, index)}
         >
           {tab}
