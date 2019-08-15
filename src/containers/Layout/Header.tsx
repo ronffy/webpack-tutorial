@@ -1,24 +1,34 @@
 
 import * as React from 'react';
-import { connect } from 'react-redux';
+import { connect, DispatchProp, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { push } from 'connected-react-router';
+import { Action } from 'redux';
+import { RootState } from '../../config/types';
 import Menu, { ClickParam, SubMenu, ClickSubParam } from '../../components/Menu';
 const MenuItem = Menu.Item;
 
-type Props = {
-  onClickMemuItem: (param: ClickParam) => void,
-  onClickSubMenu: (param: ClickSubParam) => void,
-  onMenuOpenChange: (param: string[]) => void,
-  menuSelectedKeys: string[],
-  menuOpenKeys: string[],
+type StateProps = {
+  menus: []
+  menuSelectedKeys: string[]
+  menuOpenKeys: string[]
 }
+
+interface DispatchProps extends DispatchProp<Action> {
+  onClickMemuItem: (param: ClickParam) => void
+  onClickSubMenu?: (param: ClickSubParam) => void
+  onMenuOpenChange: (param: string[]) => void
+}
+
+type OwnProps = {}
+
+type Props = StateProps & DispatchProps & OwnProps
 
 class Header extends React.PureComponent<Props> {
 
   render() {
-    const { 
+    const {
       // menus, 
-      menuSelectedKeys, 
+      menuSelectedKeys,
       menuOpenKeys,
       onMenuOpenChange,
       onClickMemuItem,
@@ -43,13 +53,14 @@ class Header extends React.PureComponent<Props> {
   }
 }
 
-const mapStateToProps = ({ app }) => ({
+const mapStateToProps: MapStateToProps<StateProps, OwnProps, RootState> = ({ app }) => ({
   menus: app.menus,
   menuSelectedKeys: app.menuSelectedKeys,
   menuOpenKeys: app.menuOpenKeys,
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps: MapDispatchToProps<DispatchProps, OwnProps> = (dispatch) => ({
+  dispatch,
   onClickMemuItem({ key, item, domEvent }: ClickParam) {
     dispatch({
       type: 'APP_UPDATESTATE',

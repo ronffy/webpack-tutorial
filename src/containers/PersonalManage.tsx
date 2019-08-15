@@ -1,19 +1,28 @@
 import * as React from 'react';
 import Tabs from '../components/Tabs';
-import { connect } from 'react-redux';
+import { Action } from 'redux';
+import { connect, MapDispatchToProps, DispatchProp, MapStateToProps } from 'react-redux';
+import { RootState } from '../config/types';
 const { TabPane } = Tabs;
 
 type PaneProps = {
-  key: string | number;
-  tab: React.ReactNode;
-  content: React.ReactNode;
+  key: string | number
+  tab: React.ReactNode
+  content: React.ReactNode
 }
 
-type Props = {
-  activeKey: string;
-  onChangeActiveKey: (activeKey: string) => void,
-  tabs: PaneProps[];
+type OwnProps = {}
+
+interface DispatchProps extends DispatchProp<Action> {
+  onChangeActiveKey: (activeKey: string) => void
 }
+
+type StateProps = {
+  activeKey: string
+  tabs: PaneProps[]
+}
+
+type Props = StateProps & DispatchProps & OwnProps
 
 
 class PersonalManage extends React.PureComponent<Props> {
@@ -31,12 +40,13 @@ class PersonalManage extends React.PureComponent<Props> {
   }
 }
 
-const mapStateToProps = ({ personal }) => ({
+const mapStateToProps: MapStateToProps<StateProps, OwnProps, RootState> = ({ personal }) => ({
   tabs: personal.tabs,
   activeKey: personal.activeKey,
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps: MapDispatchToProps<DispatchProps, OwnProps> = (dispatch) => ({
+  dispatch,
   onChangeActiveKey(activeKey: string) {
     dispatch({
       type: 'PERSONAL_ACTIVEKEY',
@@ -45,6 +55,6 @@ const mapDispatchToProps = (dispatch) => ({
       }
     })
   }
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(PersonalManage);

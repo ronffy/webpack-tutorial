@@ -1,6 +1,14 @@
+
+export type AppState = {
+  login: boolean;
+  menus: [];
+  menuOpenKeys: string[];
+  menuSelectedKeys: string[];
+}
+
 export default router => {
   const pathname = router.location.pathname;
-  const initState = {
+  const initState: AppState = {
     login: false,
     menus: [],
     menuOpenKeys: [],

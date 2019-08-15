@@ -1,3 +1,15 @@
+import { ReactNode } from 'react';
+
+interface Tab {
+  key: string;
+  tab: string;
+  content: string | ReactNode;
+}
+
+export type PersonalState = {
+  activeKey: string;
+  tabs: Tab[];
+}
 
 const initState = {
   activeKey: 'tab1',
@@ -15,7 +27,7 @@ const initState = {
   ]
 }
 
-export default (state = initState, { payload, type }) => {
+export default (state: PersonalState = initState, { payload, type }) => {
   switch (type) {
     case 'PERSONAL_ACTIVEKEY':
       return {

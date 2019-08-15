@@ -4,6 +4,7 @@ import {
   MouseEventHandler, 
   InputHTMLAttributes,
 } from 'react';
+import { RootState } from '../reducers';
 
 export type OnClick<T = HTMLDivElement> = MouseEventHandler<T>;
 
@@ -21,3 +22,6 @@ export type NodeProps<T = HTMLDivElement> = Partial<{
 }>
 
 export interface InputProps<T = HTMLInputElement> extends InputHTMLAttributes<T> {}
+
+export type RootState = RootState;
+
