@@ -3,10 +3,11 @@ import classNames from 'classnames';
 import Triangle from '../Triangle';
 
 interface Props {
-  onClick?: MouseEventHandler<HTMLDivElement>;
-  className?: string;
-  title: string | React.ReactNode;
-  active: boolean;
+  onClick?: MouseEventHandler<HTMLDivElement>
+  className?: string
+  title: string | React.ReactNode
+  opened?: boolean
+  active?: boolean
 }
 
 const SubMenu: SFC<Props> = React.memo(({
@@ -14,16 +15,17 @@ const SubMenu: SFC<Props> = React.memo(({
   children,
   className,
   title,
+  opened,
   active,
 }) => (
     <li
-      className={classNames('comp-menu-sub', className, { active })}
+      className={classNames('comp-menu-sub', className, { opened, active })}
     >
       <div className="comp-menu-sub-title" onClick={onClick}>
         <span className="u-fl">{title}</span>
         <Triangle
           className="u-fr"
-          type={active ? 'top' : 'bottom'}
+          type={opened ? 'top' : 'bottom'}
           size="small"
         />
       </div>

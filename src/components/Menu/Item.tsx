@@ -2,9 +2,9 @@ import React, { SFC, MouseEventHandler } from 'react';
 import classNames from 'classnames';
 
 interface Props {
-  onClick?: MouseEventHandler<HTMLLIElement>;
-  className?: string;
-  active?: boolean;
+  onClick?: MouseEventHandler<HTMLLIElement>
+  className?: string
+  active?: boolean
 }
 
 const Item: SFC<Props> = React.memo(({

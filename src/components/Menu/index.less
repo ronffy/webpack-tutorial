@@ -26,8 +26,8 @@
     color: #666;
 
     &.active {
-      color: #000;
-      background: #eee;
+      color: #35c9c1;
+      background: #f0fffc;
     }
   }
 
@@ -41,7 +41,7 @@
     }
 
     >ul {
-      display: block;
+      display: none;
 
       .comp-menu-item {
         padding: 7px 0;
@@ -49,12 +49,16 @@
       }
     }
 
-    &.active {
+    &.opened {
       .comp-menu-sub-title {}
 
       >ul {
-        display: none;
+        display: block;
       }
+    }
+
+    &.active {
+      color: #35c9c1;
     }
   }
 

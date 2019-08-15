@@ -1,30 +1,30 @@
-import React, { CSSProperties, isValidElement } from 'react';
+import React, { CSSProperties, isValidElement, ReactNode } from 'react';
 import classNames from 'classnames';
 import Item from './Item';
 import SubMenu from './SubMenu';
 import './index.less';
 
 export interface ClickParam {
-  key: string;
-  // keyPath: Array<string>;
-  item: any;
-  domEvent: Event;
+  key: string
+  // keyPath: Array<string>
+  item: any
+  domEvent: Event
 }
 
 export interface ClickSubParam {
-  key: string;
-  domEvent: Event;
+  key: string
+  domEvent: Event
 }
 
 interface Props {
-  selectedKeys?: string[];
-  openKeys?: string[];
-  style?: CSSProperties;
-  mode?: string;
-  className?: string;
-  onClick?: (param: ClickParam) => void;
-  onSubClick?: (param: ClickSubParam) => void;
-  onOpenChange?: (param: string[]) => void;
+  selectedKeys?: string[]
+  openKeys?: string[]
+  style?: CSSProperties
+  mode?: string
+  className?: string
+  onClick?: (param: ClickParam) => void
+  onSubClick?: (param: ClickSubParam) => void
+  onOpenChange?: (param: string[]) => void
 }
 
 const defaultProps = {
@@ -44,6 +44,33 @@ class Menu extends React.PureComponent<Props> {
   static Item = Item;
   static defaultProps: DefaultProps = defaultProps;
 
+  private eachChildToGetActive(children: ReactNode) {
+    const { selectedKeys } = this.props;
+    let active = false;
+    console.time('s');
+    const each = (_children: ReactNode) => {
+      React.Children.forEach(_children, child => {
+        if (!isValidElement(child)) {
+          return;
+        }
+        if (active) {
+          return;
+        }
+        const _key = child.key ? `${child.key}` : '';
+        if (selectedKeys!.includes(_key)) {
+          active = true;
+        }
+        const __children = child.props.children;
+        if (__children) {
+          each(__children);
+        }
+      })
+    }
+    each(children);
+    console.timeEnd('s');
+    return active;
+  }
+
   private renderChildren = (children: Menu['props']['children']) => {
     const {
       selectedKeys,
@@ -61,14 +88,17 @@ class Menu extends React.PureComponent<Props> {
       const _key = child.key ? `${child.key}` : '';
       const isSubMenuNode = !!_props.title;
 
+      // SubMenu 
       if (isSubMenuNode) {
         let newOpenKeys = [...openKeys!];
         const _keyIndex = openKeys!.indexOf(_key);
         _keyIndex !== -1 ? newOpenKeys.splice(_keyIndex, 1) : newOpenKeys.push(_key);
         
+        
         const newProps = {
           ..._props,
-          active: newOpenKeys.includes(_key),
+          opened: newOpenKeys.includes(_key),
+          active: this.eachChildToGetActive(_props.children),
           onClick(e: Event) {
             const param: ClickSubParam = {
               key: _key,
@@ -82,6 +112,7 @@ class Menu extends React.PureComponent<Props> {
         return React.cloneElement(child, newProps, this.renderChildren(_props.children))
       }
 
+      // Item 项
       const newProps = {
         ..._props,
         active: selectedKeys!.includes(_key),
