@@ -47,7 +47,6 @@ class Menu extends React.PureComponent<Props> {
   private eachChildToGetActive(children: ReactNode) {
     const { selectedKeys } = this.props;
     let active = false;
-    console.time('s');
     const each = (_children: ReactNode) => {
       React.Children.forEach(_children, child => {
         if (!isValidElement(child)) {
@@ -67,7 +66,6 @@ class Menu extends React.PureComponent<Props> {
       })
     }
     each(children);
-    console.timeEnd('s');
     return active;
   }
 

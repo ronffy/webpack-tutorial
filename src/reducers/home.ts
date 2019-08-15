@@ -12,14 +12,16 @@ interface CollapseItem {
 }
 
 export type HomeState = {
+  loading: boolean
   collapseList: CollapseItem[]
 }
 
-const initState = {
+const initState: HomeState = {
+  loading: false,
   collapseList: [],
 };
 
-const reducer: Reducer<HomeState, Action> = (state = initState, { payload, type }) => {
+const reducer: Reducer<HomeState, Action> = (state: HomeState = initState, { payload, type }: Action) => {
   switch (type) {
     default:
       return state;

@@ -18,7 +18,9 @@ module.exports = {
     const query = req.query;
     const id = query.id;
 
-    res.json(getCollapse(id));
+    setTimeout(() => {
+      res.json(getCollapse(id));
+    }, 1000);
   },
   
 }

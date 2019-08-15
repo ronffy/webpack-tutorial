@@ -12,13 +12,13 @@ export function createRequestCollapse(id: string | number) {
       if (status !== 200) {
         return disptch({
           type: 'error',
-          payload: statusText
+          error: statusText
         })
       }
       if (code !== 0 || !Array.isArray(data)) {
         return disptch({
           type: 'error',
-          payload: message
+          error: message
         })
       }
 
@@ -30,5 +30,22 @@ export function createRequestCollapse(id: string | number) {
       })
 
     })
+    .catch(error => {
+      return disptch({
+        type: 'error',
+        error: error
+      })
+    })
 }
+
+function requestCollapseLoading(loading: boolean) {
+  return {
+    type: 'home/updateState',
+    payload: {
+      loading
+    }
+  }
+}
+
+createRequestCollapse.loading = requestCollapseLoading;
 
