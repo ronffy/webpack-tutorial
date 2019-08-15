@@ -1,8 +1,7 @@
-import React, { SFC } from 'react';
-import { OnClick } from '../../config/types';
+import React, { SFC, MouseEventHandler } from 'react';
 
 interface Props {
-  onClick?: OnClick<HTMLButtonElement>
+  onClick?: MouseEventHandler
   color?: string
 }
 

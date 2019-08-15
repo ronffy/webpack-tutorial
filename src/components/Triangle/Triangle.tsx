@@ -1,6 +1,5 @@
-import React, { SFC, CSSProperties } from 'react';
+import React, { SFC, CSSProperties, MouseEventHandler } from 'react';
 import classNames from 'classnames';
-import { OnClick } from '../../config/types';
 import './index.less';
 
 enum ANGLE_TYPE { top = 'top', RIGHT = 'right', BOTTOM = 'bottom', LEFT = 'left' }
@@ -10,7 +9,7 @@ type AngleType = 'top' | 'right' | 'bottom' | 'left'
 type AngleSize = 'large' | 'small' | 'default'
 
 interface Props {
-  onClick?: OnClick<HTMLDivElement>
+  onClick?: MouseEventHandler
   color?: string
   size?: AngleSize | number
   type?: AngleType
