@@ -101,14 +101,14 @@ class Tabs extends React.Component<Props, State> {
     });
 
     return (
-      <>
+      <div>
         <div className="tabs-nav clearfix">
           {tabBar}
         </div>
         <div className="tabs-content clearfix">
           {tabContent}
         </div>
-      </>
+      </div>
     )
   }
 

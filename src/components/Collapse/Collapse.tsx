@@ -12,13 +12,13 @@ interface Props {
 }
 
 const Collapse: SFC<Props> = ({ list }: Props) => (
-  <>
+  <div>
     {list.map(({ id, title, content }) => (
       <React.Fragment key={id}>
         <Panel title={title}>{content}</Panel>
       </React.Fragment>
     ))}
-  </>
+  </div>
 )
 
 export default Collapse;
