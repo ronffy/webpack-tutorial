@@ -6,6 +6,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const apis = {
+  origin: 'http://localhost:8000',
   preApi,
   api1: `${preApi}/web/users1`,
   api2: `${preApi}/app/users2`,

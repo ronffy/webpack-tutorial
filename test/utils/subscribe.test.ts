@@ -1,5 +1,5 @@
 
-import subscribe from '../src/utils/subscribe';
+import subscribe from '../../src/utils/subscribe';
 
 test('test utils subscribe', () => {
 

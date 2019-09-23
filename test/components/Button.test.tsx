@@ -1,5 +1,6 @@
 
-import Button from '../src/components/Button/Button';
+import React from 'react';
+import Button from '../../src/components/Button/Button';
 import renderer from 'react-test-renderer';
 
 test('test component Button', () => {

@@ -1,5 +1,5 @@
 
-import isAdultAsync from '../src/utils/isAdultAsync';
+import isAdultAsync from '../../src/utils/isAdultAsync';
 
 test('use callback test utils isAdult', (done) => {
   function trueCallback(result: boolean) {

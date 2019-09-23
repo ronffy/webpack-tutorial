@@ -12,16 +12,20 @@ interface CollapseItem {
 }
 
 export type HomeState = {
+  error: null | string
   loading: boolean
   collapseList: CollapseItem[]
 }
 
 const initState: HomeState = {
+  error: null,
   loading: false,
   collapseList: [],
 };
 
 const reducer: Reducer<HomeState, Action> = (state: HomeState = initState, { payload, type }: Action) => {
+  console.log('payload', payload);
+  
   switch (type) {
     default:
       return state;

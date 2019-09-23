@@ -1,5 +1,5 @@
 
-import isObject from '../src/utils/isObject';
+import isObject from '../../src/utils/isObject';
 import {
   fn,
   asyncFn,
@@ -13,7 +13,7 @@ import {
   proxy,
   symbol,
   generator,
-} from '../src/config/jest';
+} from '../../src/config/jest';
 
 
 test('test utils isObject', () => {

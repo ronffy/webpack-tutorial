@@ -1,4 +1,5 @@
-import ButtonCounter from '../src/components/ButtonCounter/ButtonCounter';
+import React from 'react';
+import ButtonCounter from '../../src/components/ButtonCounter/ButtonCounter';
 import renderer from 'react-test-renderer';
 
 test('test component ButtonCounter', () => {

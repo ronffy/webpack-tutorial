@@ -1,5 +1,5 @@
 
-import isFunction from '../src/utils/isFunction';
+import isFunction from '../../src/utils/isFunction';
 import { 
   fn,
   asyncFn,
@@ -13,7 +13,7 @@ import {
   proxy,
   symbol,
   generator,
-} from '../src/config/jest';
+} from '../../src/config/jest';
 
 
 

@@ -1,7 +1,8 @@
-@import '../style/mixins/clearfix.less';
+@import '../../style/mixins/clearfix.less';
+@import '../../style/variables/color.less';
 
 .comp-menu.horizontal {
-  .clearfix;
+  .clearfix();
 
   .comp-menu-item {
 
@@ -10,7 +11,7 @@
     }
 
     &.active {
-      color: aquamarine;
+      color: @primary-color;
     }
   }
 
@@ -26,8 +27,8 @@
     color: #666;
 
     &.active {
-      color: #35c9c1;
-      background: #f0fffc;
+      color: @primary-color;
+      background: rgba(@primary-color, 0.1);
     }
   }
 
@@ -35,7 +36,7 @@
     color: #666;
 
     .comp-menu-sub-title {
-      .clearfix;
+      .clearfix();
 
       padding: 7px 15px;
     }
@@ -58,7 +59,7 @@
     }
 
     &.active {
-      color: #35c9c1;
+      color: @primary-color;
     }
   }
 
