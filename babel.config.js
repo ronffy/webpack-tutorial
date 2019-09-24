@@ -57,7 +57,7 @@ module.exports = function (api) {
       '@babel/plugin-transform-runtime',
     ],
     [
-      'babel-plugin-dynamic-import-webpack'
+      '@babel/plugin-syntax-dynamic-import'
     ]
   ]
 

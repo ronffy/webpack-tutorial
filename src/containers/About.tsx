@@ -2,8 +2,13 @@
 import * as React from 'react';
 import ButtonCounter from '../components/ButtonCounter';
 
-const About = () => {
+type Props = {
+  xxx: any
+}
 
+const About = (props: Props) => {
+  console.log('xxx', props.xxx);
+  
   return (
     <ButtonCounter />
   )
