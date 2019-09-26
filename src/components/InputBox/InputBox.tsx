@@ -39,6 +39,9 @@ class InputBox extends React.Component<any, State> {
     return (
       <div>
         {
+          {}
+        }
+        {
           textVisible
             ? (
               <Text

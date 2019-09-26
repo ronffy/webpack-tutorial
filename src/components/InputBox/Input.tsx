@@ -1,7 +1,12 @@
-import React, { SFC } from 'react';
-import { InputProps } from '../../config/types';
+import React, { SFC, ChangeEventHandler } from 'react';
 
-const Input: SFC<InputProps> = React.memo((props: InputProps) => {
+type Props = {
+  value?: string
+  placeholder?: string
+  onChange?: ChangeEventHandler
+}
+
+const Input: SFC<Props> = React.memo((props: Props) => {
   const { onChange, value, placeholder } = props;
   return (
     <input

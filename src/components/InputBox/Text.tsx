@@ -1,8 +1,9 @@
-import React, { SFC } from 'react';
-import { NodeProps } from '../../config/types';
+import React, { SFC, MouseEventHandler } from 'react';
 
-interface Props extends NodeProps {
+interface Props {
   name: string
+  children: React.ReactNode
+  onClick?: MouseEventHandler
 }
 
 const Text: SFC<Props> = React.memo((props: Props) => {
