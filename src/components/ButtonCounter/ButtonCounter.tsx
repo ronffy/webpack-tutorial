@@ -1,45 +1,22 @@
-import React from 'react';
+import React, { useState, SFC } from 'react';
 import Button from '../Button';
 
-const initState = {
-  count: 0
-};
-
-type State = Readonly<typeof initState>
-
-class ButtonCounter extends React.Component<any, State> {
-  readonly state: State = initState;
-
-  render() {
-    const { count } = this.state;
-
-    return (
-      <div>
-        <Button onClick={this.handleIncrement}>加</Button>
-        <Button onClick={this.handleDecrement}>减</Button>
-        <div>
-          计数值是: {count}.
-        </div>
-      </div>
-    )
-  }
-
-  private handleIncrement = () => {
-    this.setState(incrementCount);
-  }
-
-  private handleDecrement = () => {
-    this.setState(decrementCount);
-  }
-
+type Props = {
+  count: number
 }
 
-const incrementCount = (prevState: State) => ({
-  count: prevState.count + 1
-});
+const ButtonCounter: SFC<Props> = (props) => {
+  const [count, setCount] = useState(props.count);
 
-const decrementCount = (prevState: State) => ({
-  count: prevState.count - 1
-});
+  return (
+    <div>
+      <Button onClick={() => setCount(count + 1)}>加</Button>
+      <Button onClick={() => setCount(count - 1)}>减</Button>
+      <div>
+        计数值是: {count}
+      </div>
+    </div>
+  )
+}
 
 export default ButtonCounter;
