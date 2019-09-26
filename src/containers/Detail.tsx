@@ -1,11 +1,16 @@
 
-import * as React from 'react';
-import InputBox from '../components/InputBox';
+import React, { lazy, Suspense } from 'react';
+import Loading from '../components/Loading';
+import { withErrorBoundary } from '../components/ErrorBoundary';
+
+const InputBox = lazy(() => import('../components/InputBox'));
 
 const Detail = () => {
   return (
-    <InputBox />
+    <Suspense fallback={<Loading />}>
+      <InputBox />
+    </Suspense>
   )
 };
 
-export default Detail;
+export default withErrorBoundary(Detail);
